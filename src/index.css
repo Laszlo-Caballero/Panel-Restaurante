@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "WorkSansBlod";
+    src: url("./font/WorkSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: "WorkSansLight";
+    src: url("./font/WorkSans-Light.ttf");
+}
+
+@font-face {
+    font-family: "WorkSansMedium";
+    src: url("./font/WorkSans-Medium.ttf");
+}
+
+@font-face {
+    font-family: "WorkSansRegular";
+    src: url("./font/WorkSans-Regular.ttf");
+}
