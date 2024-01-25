@@ -10,7 +10,6 @@ const connectionConfig = {
 async function connectDatabase() {
   try {
     const connection = await mysql.createConnection(connectionConfig);
-    console.log("Conexión exitosa a MySQL");
     return connection;
   } catch (error) {
     console.error("Error al conectar a MySQL:", error.message);
