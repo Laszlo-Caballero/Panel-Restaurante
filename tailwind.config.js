@@ -18,6 +18,18 @@ export default {
           950: "#273344",
         },
       },
+      fontFamily: {
+        WorkSanslight: ["WorkSansLight", "Arial"],
+        WorkSansregular: ["WorkSansRegular", "Arial"],
+        WorkSansmedium: ["WorkSansMedium", "Arial"],
+        WorkSansblod: ["WorkSansBlod", "Arial"],
+      },
+      boxShadow: {
+        Custom: "10px 9px 53px -1px rgba(0,0,0,0.48)",
+      },
+      gridTemplateColumns: {
+        "3-auto": "auto auto auto",
+      },
     },
   },
   plugins: [],
