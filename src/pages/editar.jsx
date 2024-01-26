@@ -1,6 +1,8 @@
 import TablaEdit from "../components/tabla";
 import useGet from "../hooks/useGet";
 import { createColumnHelper } from "@tanstack/react-table";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 function Editar() {
   const { values } = useGet("menu");
   const columnHelper = createColumnHelper();
@@ -33,16 +35,26 @@ function Editar() {
     columnHelper.accessor("id", {
       header: () => "Editar/Eliminar",
       cell: (info) => (
-        <div>
-          <button>Editar</button>
-          <button>Eliminar</button>
+        <div className="flex justify-center gap-12">
+          <button>
+            <EditIcon />
+          </button>
+          <button>
+            <DeleteIcon />
+          </button>
         </div>
       ),
     }),
   ];
   return (
     <main className="p-8">
-      <TablaEdit values={values} columns={columns} />
+      <section>
+        <h1 className="font-WorkSansblod text-xl mb-4">Comidas</h1>
+        <button className="px-8 py-4 bg-nepal-700 rounded-lg font-WorkSansmedium text-nepal-100 mb-4">
+          Agregar
+        </button>
+        <TablaEdit values={values} columns={columns} />
+      </section>
     </main>
   );
 }
