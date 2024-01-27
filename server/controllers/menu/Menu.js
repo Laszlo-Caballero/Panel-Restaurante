@@ -27,3 +27,17 @@ export async function Menu(req, res) {
     res.status(404).send(error);
   }
 }
+
+export async function Food(req, res) {
+  const database = await connectDatabase();
+  const { id } = req.params;
+  try {
+    const [rows, fields] = await database.execute(
+      "Select * from comidas where id = ?",
+      [id]
+    );
+    res.send(rows);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
