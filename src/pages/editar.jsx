@@ -3,9 +3,13 @@ import useGet from "../hooks/useGet";
 import { createColumnHelper } from "@tanstack/react-table";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useState } from "react";
+import AgregarComida from "../components/forms/agregar";
+
 function Editar() {
-  const { values } = useGet("menu");
   const columnHelper = createColumnHelper();
+  const [modalForms, setModalForms] = useState(false);
+  const { values } = useGet("menu", [modalForms]);
   const columns = [
     columnHelper.accessor((row) => row.img, {
       id: "img",
@@ -47,15 +51,23 @@ function Editar() {
     }),
   ];
   return (
-    <main className="p-8">
-      <section>
-        <h1 className="font-WorkSansblod text-xl mb-4">Comidas</h1>
-        <button className="px-8 py-4 bg-nepal-700 rounded-lg font-WorkSansmedium text-nepal-100 mb-4">
-          Agregar
-        </button>
-        <TablaEdit values={values} columns={columns} />
+    <>
+      <section className="p-8">
+        <article>
+          <h1 className="font-WorkSansblod text-xl mb-4">Comidas</h1>
+          <button
+            className="px-8 py-4 bg-nepal-700 rounded-lg font-WorkSansmedium text-nepal-100 mb-4"
+            onClick={() => {
+              setModalForms(true);
+            }}
+          >
+            Agregar
+          </button>
+          <TablaEdit values={values} columns={columns} />
+        </article>
       </section>
-    </main>
+      {modalForms && <AgregarComida setModalForms={setModalForms} />}
+    </>
   );
 }
 
