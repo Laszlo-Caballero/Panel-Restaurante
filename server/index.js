@@ -15,5 +15,3 @@ app.use(express.static("storage"));
 app.listen(3000, () => {
   console.log("Servidor Corriendo en 3000");
 });
-
-//setInterval(EliminarOtros, 3000);
