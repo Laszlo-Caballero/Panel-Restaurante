@@ -4,16 +4,17 @@ import { subirComida } from "../../utils/database.js";
 
 export async function EnviarComida(req, res) {
   const { file } = req;
-  const { nombre, precio } = req.body;
-  try {
-    await ConvertirWebp(file);
-    await subirComida(nombre, precio, file.filename.split(".").shift());
-    res.send("se envio");
+  const { nombre, precio, descripcion, estado } = req.body;
 
+  try {
+    const img = file.filename.split(".").shift();
+    await ConvertirWebp(file);
+    await subirComida(nombre, precio, img, estado, descripcion);
+    res.send("se envio");
     console.log("se envio");
   } catch (error) {
     console.error(error);
-    res.send("error");
+    res.status(404).send("error");
   }
 }
 
