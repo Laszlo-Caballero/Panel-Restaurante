@@ -3,7 +3,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Modal from "./modal/modal";
 
 function TablaEdit({ values, columns }) {
   const table = useReactTable({
@@ -50,13 +49,6 @@ function TablaEdit({ values, columns }) {
           </tbody>
         </table>
       </div>
-      <Modal className="w-[60em] h-[50em] bg-nepal-900 rounded-xl p-8">
-        <form className="flex w-full h-full flex-col">
-          <h1 className="font-WorkSansblod text-xl text-nepal-100 w-full">
-            Añandir Producto
-          </h1>
-        </form>
-      </Modal>
     </>
   );
 }
