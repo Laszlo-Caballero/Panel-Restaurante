@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useGet(ruta) {
+export default function useGet(ruta, update = []) {
   const [values, setValues] = useState([]);
   useEffect(() => {
     axios
@@ -12,7 +12,7 @@ export default function useGet(ruta) {
       .catch((error) => {
         console.log(error);
       });
-  }, [ruta]);
+  }, update);
 
   return { values };
 }
