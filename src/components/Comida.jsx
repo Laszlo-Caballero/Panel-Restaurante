@@ -1,6 +1,6 @@
 function Comida({ imagen, nombre, precio, vendido }) {
   return (
-    <article className="flex w-64 flex-col pb-2 shadow-Custom">
+    <article className="flex w-64 flex-col pb-2 shadow-Custom mb-10">
       <img src={`http://localhost:3000/${imagen}.webp`} alt={nombre} />
       <div className="px-2 py-3 flex flex-col gap-y-3">
         <div className="flex justify-between items-center">
