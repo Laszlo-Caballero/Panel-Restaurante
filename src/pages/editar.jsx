@@ -3,14 +3,17 @@ import useGet from "../hooks/useGet";
 import { createColumnHelper } from "@tanstack/react-table";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AgregarComida from "../components/forms/agregar";
+import ActaulizarComida from "../components/forms/actualizar";
 
 function Editar() {
   const columnHelper = createColumnHelper();
   const [modalForms, setModalForms] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
-  const { values } = useGet("menu", [modalForms]);
+  const [id, setId] = useState(0);
+  const values = useGet("menu", [modalForms]);
+
   const columns = [
     columnHelper.accessor((row) => row.img, {
       id: "img",
@@ -44,6 +47,7 @@ function Editar() {
           <button
             onClick={() => {
               setModalEdit(true);
+              setId(info.getValue());
             }}
           >
             <EditIcon />
@@ -72,6 +76,7 @@ function Editar() {
         </article>
       </section>
       {modalForms && <AgregarComida setModalForms={setModalForms} />}
+      {modalEdit && <ActaulizarComida setModalForms={setModalEdit} id={id} />}
     </>
   );
 }

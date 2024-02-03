@@ -2,7 +2,7 @@ import useGet from "../hooks/useGet";
 import Comida from "../components/Comida";
 
 function Catalogo() {
-  const { values } = useGet("menu");
+  const values = useGet("menu");
   console.log(values);
   return (
     <main className="p-8 w-full flex flex-col">
