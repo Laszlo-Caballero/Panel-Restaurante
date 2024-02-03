@@ -96,7 +96,16 @@ function AgregarComida({ setModalForms }) {
           />
           {errors.descripcion && <Error error={errors.descripcion.message} />}
           <LabelForm name="imagen" title="Imagen del Producto" />
-          <InputForm type="file" name="imagen" require={register("file")} />
+          <InputForm
+            type="file"
+            name="imagen"
+            require={register("file", {
+              required: {
+                value: true,
+                message: "Se necesita imagen",
+              },
+            })}
+          />
         </div>
         <div className="flex flex-col items-center justify-between shadow-Custom px-12 py-8 bg-nepal-50">
           <h1 className="font-WorkSansblod text-xl text-nepal-900 border-b border-black w-full text-center mb-12 py-2">
