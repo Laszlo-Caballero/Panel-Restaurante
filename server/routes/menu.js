@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.post("/insertar", subirArchivo.single("file"), EnviarComida);
-router.post("/actualizar", subirArchivo.single("file"), ActualizarComida);
+router.put("/actualizar", subirArchivo.single("file"), ActualizarComida);
 router.get("/", Menu);
 router.get("/comida/:id", Food);
 
