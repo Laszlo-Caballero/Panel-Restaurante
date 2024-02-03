@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Editar from "./pages/editar";
 import Catalogo from "./pages/catalogo";
+import PanelComida from "./pages/comida";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/editar" element={<Editar />} />
             <Route path="/catalogo" element={<Catalogo />} />
+            <Route path="/menu/:id" element={<PanelComida />} />
           </Routes>
         </main>
       </div>

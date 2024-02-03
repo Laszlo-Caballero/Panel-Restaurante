@@ -9,6 +9,7 @@ import AgregarComida from "../components/forms/agregar";
 function Editar() {
   const columnHelper = createColumnHelper();
   const [modalForms, setModalForms] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const { values } = useGet("menu", [modalForms]);
   const columns = [
     columnHelper.accessor((row) => row.img, {
@@ -40,7 +41,11 @@ function Editar() {
       header: () => "Editar/Eliminar",
       cell: (info) => (
         <div className="flex justify-center gap-12">
-          <button>
+          <button
+            onClick={() => {
+              setModalEdit(true);
+            }}
+          >
             <EditIcon />
           </button>
           <button>
