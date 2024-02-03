@@ -14,5 +14,5 @@ export default function useGet(ruta, update = []) {
       });
   }, update);
 
-  return { values };
+  return values;
 }
