@@ -1,6 +1,10 @@
 import ConvertirWebp from "../../config/Webp.js";
 import connectDatabase from "../../config/mysql.js";
-import { subirComida } from "../../utils/database.js";
+import {
+  actualizarComida,
+  actualizarComidaFoto,
+  subirComida,
+} from "../../utils/database.js";
 
 export async function EnviarComida(req, res) {
   const { file } = req;
@@ -15,6 +19,40 @@ export async function EnviarComida(req, res) {
   } catch (error) {
     console.error(error);
     res.status(404).send("error");
+  }
+}
+
+export async function ActualizarComida(req, res) {
+  const { file } = req;
+  const { id, nombre, precio, vendidos, estado, descripcion } = req.body;
+  if (file) {
+    try {
+      const img = file.filename.split(".").shift();
+      await ConvertirWebp(file);
+      await actualizarComidaFoto(
+        id,
+        nombre,
+        precio,
+        img,
+        vendidos,
+        estado,
+        descripcion
+      );
+      res.send("se actualizo");
+      console.log("se actualizo");
+    } catch (error) {
+      console.error(error);
+      res.status(404).send("error");
+    }
+  } else {
+    try {
+      await actualizarComida(id, nombre, precio, vendidos, estado, descripcion);
+      res.send("se actualizo");
+      console.log("se actualizo");
+    } catch (error) {
+      console.error(error);
+      res.status(404).send("error");
+    }
   }
 }
 
