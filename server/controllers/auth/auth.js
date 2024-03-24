@@ -12,7 +12,6 @@ export async function Register(req, res) {
     );
     const id = result.insertId;
     const token = await createAccessToken(id.toString());
-    console.log(token);
     res.cookie("token", token);
     res.send({
       message: "Se Registro",
@@ -33,7 +32,6 @@ export async function Login(req, res) {
       [email]
     );
     const rowsbolean = rows ? true : false;
-    console.log(rows, rowsbolean);
     if (!rowsbolean) return res.status(404).send("Not found");
     const data = rows[0];
     const isMatch = await bcrypt.compare(contraseña, data.contraseña);
