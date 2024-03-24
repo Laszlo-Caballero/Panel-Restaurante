@@ -8,3 +8,14 @@ export const menuSchema = z.object({
   descripcion: z.string().min(100),
   vendidos: z.number().nonnegative().optional(),
 });
+
+export const userSchema = z.object({
+  nombre: z.string().min(5),
+  email: z.string().email(),
+  contraseña: z.string().min(5),
+});
+
+export const loginSchema = z.object({
+  email: z.string().email(),
+  contraseña: z.string().min(5),
+});
