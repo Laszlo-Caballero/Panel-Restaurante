@@ -1,9 +1,10 @@
 import Hamburgesa from "./../../assets/hamburgesa.jpg";
 import CloseIcon from "@mui/icons-material/Close";
-import { LabelForm, Error, InputForm, Slider } from "..//forms/form";
+import { LabelForm, Error, InputForm, Slider, Loader } from "..//forms/form";
 import Modal from "./../modal/modal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useState } from "react";
 
 function AgregarComida({ setModalForms }) {
   const {
@@ -14,20 +15,27 @@ function AgregarComida({ setModalForms }) {
     reset,
   } = useForm();
   const url = "http://localhost:3000/menu/insertar";
+  const [loader, setLoader] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
   const onSubmit = handleSubmit((data) => {
     console.log(data);
-    const formData = new FormData()
-    formData.append("jsonData", JSON.stringify({
-      "nombre": data.nombre,
-      "precio": parseFloat(data.precio),
-      "estado": data.estado,
-      "descripcion": data.descripcion,
-    }))
-    formData.append("file", data.file[0])
+    const formData = new FormData();
+    setLoader(true);
+    formData.append(
+      "jsonData",
+      JSON.stringify({
+        nombre: data.nombre,
+        precio: parseFloat(data.precio),
+        estado: data.estado,
+        descripcion: data.descripcion,
+      })
+    );
+    formData.append("file", data.file[0]);
     axios
       .post(url, formData)
       .then((response) => {
         console.log(response.data);
+        setLoader(false);
         reset();
       })
       .catch((error) => {
@@ -35,7 +43,7 @@ function AgregarComida({ setModalForms }) {
       });
   });
   return (
-    <Modal className="w-[60em] h-[50em]  rounded-xl p-8 flex flex-col gap-y-8">
+    <Modal className="w-[60em] h-[50em] p-8 flex flex-col gap-y-8">
       <div
         className="absolute top-2 right-2 text-white cursor-pointer"
         onClick={() => {
@@ -134,6 +142,7 @@ function AgregarComida({ setModalForms }) {
           </button>
         </div>
       </form>
+      {loader && <Loader />}
     </Modal>
   );
 }

@@ -1,5 +1,5 @@
 import "./slider.css";
-
+import CircularProgress from "@mui/material/CircularProgress";
 export function LabelForm({ name, title }) {
   return (
     <label htmlFor={name} className="font-WorkSansmedium text-lg py-2">
@@ -22,5 +22,13 @@ export function Slider({ require }) {
       <input type="checkbox" {...require} />
       <span className="slider round"></span>
     </label>
+  );
+}
+
+export function Loader() {
+  return (
+    <div className="absolute top-0 left-0 flex justify-center items-center w-screen h-screen z-30 bg-black bg-opacity-40">
+      <CircularProgress />
+    </div>
   );
 }
