@@ -8,7 +8,8 @@ import {
 
 export async function EnviarComida(req, res) {
   const { file } = req;
-  const { nombre, precio, descripcion, estado } = req.body;
+  const { jsonData } = req.body;
+  const { nombre, precio, estado, descripcion } = JSON.parse(jsonData);
 
   try {
     const img = file.filename.split(".").shift();
@@ -18,13 +19,15 @@ export async function EnviarComida(req, res) {
     console.log("se envio");
   } catch (error) {
     console.error(error);
-    res.status(404).send("error");
+    res.status(404).send(error);
   }
 }
 
 export async function ActualizarComida(req, res) {
   const { file } = req;
-  const { id, nombre, precio, vendidos, estado, descripcion } = req.body;
+  const { jsonData } = req.body;
+  const { id, nombre, precio, estado, descripcion, vendidos } =
+    JSON.parse(jsonData);
   if (file) {
     try {
       const img = file.filename.split(".").shift();
