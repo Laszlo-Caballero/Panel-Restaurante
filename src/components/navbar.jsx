@@ -12,19 +12,19 @@ function NavBar() {
         <div className="h-auto flex flex-col items-center">
           <Link
             className="py-4 flex w-full px-4 items-center gap-3 cursor-pointer"
-            to="/"
+            to="/panel"
           >
             <Dash /> dashboard
           </Link>
           <Box icon={<Menu />} title="Menu">
-            <Content path="/catalogo">Catalogo</Content>
-            <Content path="/editar">Editar Menu</Content>
+            <Content path="/panel/catalogo">Catalogo</Content>
+            <Content path="/panel/editar">Editar Menu</Content>
           </Box>
           <Box icon={<Table />} title="Tablas">
-            <Content path="/Clientes">Clientes</Content>
-            <Content path="/Ingresos">Ingresos</Content>
-            <Content path="/Facturas">Facturas</Content>
-            <Content path="/Invetario">Inventario</Content>
+            <Content path="/panel/Clientes">Clientes</Content>
+            <Content path="/panel/Ingresos">Ingresos</Content>
+            <Content path="/panel/Facturas">Facturas</Content>
+            <Content path="panel/Invetario">Inventario</Content>
           </Box>
         </div>
       </div>
