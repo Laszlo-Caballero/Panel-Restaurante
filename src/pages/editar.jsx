@@ -12,7 +12,7 @@ function Editar() {
   const [modalForms, setModalForms] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [id, setId] = useState(0);
-  const values = useGet("menu", [modalForms]);
+  const values = useGet("menu", [modalForms, modalEdit]);
 
   const columns = [
     columnHelper.accessor((row) => row.img, {
