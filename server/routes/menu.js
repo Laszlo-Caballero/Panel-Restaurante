@@ -9,7 +9,7 @@ import {
 import {
   ValidationMenu,
   ValidationUpdate,
-} from "../middlewares/schemaValidation.js";
+} from "../middleware/schemaValidation.js";
 
 const router = express.Router();
 
