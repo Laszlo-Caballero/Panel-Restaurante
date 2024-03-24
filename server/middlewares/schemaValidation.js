@@ -3,7 +3,6 @@ export const ValidationMenu = (req, res, next) => {
   try {
     const { jsonData } = req.body;
     const { nombre, precio, estado, descripcion } = JSON.parse(jsonData);
-    console.log(req.body);
     menuSchema.parse({ nombre, precio, estado, descripcion });
     next();
   } catch (error) {
