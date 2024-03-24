@@ -19,6 +19,7 @@ function ActaulizarComida({ setModalForms, id }) {
       precio: values[0] && values[0].precio,
       descripcion: values[0] && values[0].descripcion,
       estado: values[0] && values[0].status != 0 ? true : false,
+      vendidos: values[0] && values[0].vendidos,
     },
   });
 
@@ -26,11 +27,17 @@ function ActaulizarComida({ setModalForms, id }) {
   const onSubmit = handleSubmit((data) => {
     console.log(data);
     const formData = new FormData();
-    formData.append("id", id);
-    formData.append("nombre", data.nombre);
-    formData.append("precio", data.precio);
-    formData.append("estado", data.estado ? 1 : 0);
-    formData.append("descripcion", data.descripcion);
+    formData.append(
+      "jsonData",
+      JSON.stringify({
+        id: id,
+        nombre: data.nombre,
+        precio: parseFloat(data.precio),
+        estado: data.estado,
+        descripcion: data.descripcion,
+        vendidos: data.vendidos,
+      })
+    );
     formData.append("file", data.file[0]);
     axios
       .put(url, formData)
@@ -121,9 +128,30 @@ function ActaulizarComida({ setModalForms, id }) {
             alt="Imagen seleccionada"
             className="w-[300px] h-[300px]"
           />
-          <div className="flex items-center gap-16">
-            <LabelForm name="Estado" title="Estado disponible" />
-            <Slider require={register("estado")} />
+          <div className="flex flex-col items-center">
+            <div className="flex items-center gap-16">
+              <LabelForm name="Estado" title="Estado disponible" />
+              <Slider require={register("estado")} />
+            </div>
+            <div className="flex flex-col w-full">
+              <LabelForm name="Vendidos" title="Cantidad de Vendidos" />
+              <InputForm
+                name="Vendidos"
+                type="text"
+                require={register("vendidos", {
+                  required: {
+                    value: true,
+                    message: "Ventas requerido",
+                  },
+                  validate: (value) => {
+                    return (
+                      !isNaN(value) || "El numero de ventas debe ser un numero"
+                    );
+                  },
+                })}
+              />
+              {errors.vendidos && <Error error={errors.vendidos.message} />}
+            </div>
           </div>
           <button
             type="submit"

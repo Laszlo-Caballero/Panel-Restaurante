@@ -9,7 +9,7 @@ export function LabelForm({ name, title }) {
 }
 
 export function Error({ error }) {
-  return <span className="py-1 text-lg font-WorkSansmedium">{error}</span>;
+  return <span className="py-1 text-base font-WorkSansmedium">{error}</span>;
 }
 
 export function InputForm({ type, name, require }) {

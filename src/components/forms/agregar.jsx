@@ -16,12 +16,14 @@ function AgregarComida({ setModalForms }) {
   const url = "http://localhost:3000/menu/insertar";
   const onSubmit = handleSubmit((data) => {
     console.log(data);
-    const formData = new FormData();
-    formData.append("nombre", data.nombre);
-    formData.append("precio", data.precio);
-    formData.append("estado", data.estado ? 1 : 0);
-    formData.append("descripcion", data.descripcion);
-    formData.append("file", data.file[0]);
+    const formData = new FormData()
+    formData.append("jsonData", JSON.stringify({
+      "nombre": data.nombre,
+      "precio": parseFloat(data.precio),
+      "estado": data.estado,
+      "descripcion": data.descripcion,
+    }))
+    formData.append("file", data.file[0])
     axios
       .post(url, formData)
       .then((response) => {
