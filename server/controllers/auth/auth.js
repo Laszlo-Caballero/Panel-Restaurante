@@ -56,7 +56,7 @@ export async function Validate(req, res) {
 
   jwt.verify(token, PasswordJWT, async (err, user) => {
     if (err) {
-      return res.status(401).json({ message: "Unauthorized verify" });
+      return res.status(401).json({ message: "Unauthorized" });
     }
 
     const [rows, fields] = await database.execute(
@@ -68,5 +68,25 @@ export async function Validate(req, res) {
     let retorno = { ...data };
     delete retorno.id;
     return res.json(retorno);
+  });
+}
+
+export async function ValidateAdmin(req, res) {
+  const token = req.cookies.token;
+  const database = await connectDatabase();
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+  jwt.verify(token, PasswordJWT, async (err, user) => {
+    if (err) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const [rows, fields] = await database.execute(
+      "Select tipo from usuarios Where id = ?",
+      [user]
+    );
+    const data = rows[0];
+    if (!data || data.tipo != "admin")
+      return res.status(401).json({ message: "Unauthorized" });
+    return res.json(data);
   });
 }
