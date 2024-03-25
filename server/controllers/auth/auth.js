@@ -60,7 +60,7 @@ export async function Validate(req, res) {
     }
 
     const [rows, fields] = await database.execute(
-      "Select nombre, email, contraseña, tipo from usuarios Where id = ?",
+      "Select nombre, email, contraseña, tipo, imagen from usuarios Where id = ?",
       [user]
     );
     const data = rows[0];

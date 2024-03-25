@@ -6,11 +6,13 @@ import Editar from "../editar";
 import Catalogo from "../catalogo";
 import PanelComida from "../comida";
 import ProtecterRoute from "../../components/ProtecterRoute";
+import UserNavBar from "../../components/userNavBar";
 export default function Panel() {
   return (
     <>
       <NavBar />
-      <main className="w-5/6">
+      <main className="w-full">
+        <UserNavBar />
         <Routes>
           <Route element={<ProtecterRoute />}>
             <Route path="/" element={<Home />} />

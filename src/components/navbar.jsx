@@ -4,9 +4,10 @@ import Dash from "./../images/dash.svg?react";
 import Menu from "./../images/box.svg?react";
 import Table from "./../images/tables.svg?react";
 import { Link } from "react-router-dom";
+
 function NavBar() {
   return (
-    <nav className="w-1/6 border-2 min-h-screen relative border-r-nepal-100 bg-white">
+    <nav className="w-1/5 border-2 min-h-screen relative border-r-nepal-100 bg-white">
       <div className="fixed w-1/6">
         <img src={Logo} className="w-[95%]" alt="logo" />
         <div className="h-auto flex flex-col items-center">
