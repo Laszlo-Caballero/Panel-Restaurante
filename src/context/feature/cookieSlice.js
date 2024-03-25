@@ -8,11 +8,12 @@ export const tokenSlice = createSlice({
   name: "token",
   initialState,
   reducers: {
-    reset: (state, action) => {
+    resetToken: (state, action) => {
       state = "";
+      Cookies.remove("token");
     },
   },
 });
 
-export const { reset } = tokenSlice.actions;
+export const { resetToken } = tokenSlice.actions;
 export default tokenSlice.reducer;

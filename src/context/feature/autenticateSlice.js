@@ -7,8 +7,11 @@ export const autenticateSlice = createSlice({
     setAutenticate: (state, action) => {
       return action.payload;
     },
+    resetAuth: (state, action) => {
+      return false;
+    },
   },
 });
 
-export const { setAutenticate } = autenticateSlice.actions;
+export const { setAutenticate, resetAuth } = autenticateSlice.actions;
 export default autenticateSlice.reducer;
