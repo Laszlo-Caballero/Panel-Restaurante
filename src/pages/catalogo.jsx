@@ -3,7 +3,6 @@ import Comida from "../components/Comida";
 
 function Catalogo() {
   const values = useGet("menu");
-  console.log(values);
   return (
     <main className="p-8 w-full flex flex-col">
       <p className="w-full text-xl font-bold mb-5">Catalogo</p>
