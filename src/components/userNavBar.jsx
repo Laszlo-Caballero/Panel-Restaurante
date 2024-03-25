@@ -49,15 +49,15 @@ export default function UserNavBar() {
               Bienvenido, {user.nombre}
             </p>
             <Link to="profile" className="flex items-center gap-x-2 pl-2">
-              <PermIdentityOutlinedIcon /> Profile
+              <PermIdentityOutlinedIcon /> Perfil
             </Link>
             <Link to="settings" className="flex items-center gap-x-2 pl-2">
-              <SettingsOutlinedIcon /> Acount Settings
+              <SettingsOutlinedIcon /> Configurar Cuenta
             </Link>
             {user.tipo == "admin" && (
               <Link to="register" className="flex items-center gap-x-2 pl-2">
                 <PersonAddAltOutlinedIcon />
-                Register
+                Registrar Usuario
               </Link>
             )}
             <button
@@ -67,7 +67,7 @@ export default function UserNavBar() {
               }}
             >
               <PowerSettingsNewOutlinedIcon />
-              Logout
+              Salir
             </button>
           </section>
         )}
