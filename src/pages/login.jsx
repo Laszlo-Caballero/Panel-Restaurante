@@ -1,30 +1,37 @@
 import Logo from "./../images/login.webp";
 import { InputForm, LabelForm, Error, Loader } from "../components/forms/form";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "../utils/axios";
-import { Navigate, redirect } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+  const isAutenticate = useSelector((state) => state.autenticate);
   const [loader, setLodaer] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setLogin] = useState(false);
+  useEffect(() => {
+    if (isAutenticate) {
+      navigate("/panel");
+    }
+  }, [isAutenticate]);
   const onSubmit = handleSubmit((data) => {
     setLodaer(true);
     axios
       .post("/users/login", data)
       .then((response) => {
-        console.log("autenticado");
-        console.log(response.data);
         setLodaer(false);
-        setIsLogin(true);
+        setLogin(true);
+        console.log(response.data);
       })
       .catch((error) => {
         setLodaer(false);
-        setIsLogin(false);
         console.log(error);
       });
   });
@@ -78,7 +85,7 @@ export default function Login() {
         </main>
       </div>
       {loader && <Loader />}
-      {isLogin && <Navigate to="/panel" />}
+      {isLogin && <Navigate to="panel" />}
     </>
   );
 }
