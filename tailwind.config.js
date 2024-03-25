@@ -26,6 +26,8 @@ export default {
       },
       boxShadow: {
         Custom: "10px 9px 53px -1px rgba(0,0,0,0.48)",
+        nav: "10px 2px 28px -5px rgba(0,0,0,0.75)",
+        user: "0px 10px 26px -9px rgba(0,0,0,0.75)",
       },
       gridTemplateColumns: {
         "3-auto": "auto auto auto",
