@@ -4,6 +4,7 @@ import Dash from "./../images/dash.svg?react";
 import Menu from "./../images/box.svg?react";
 import Table from "./../images/tables.svg?react";
 import { Link } from "react-router-dom";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 function NavBar() {
   return (
@@ -16,6 +17,12 @@ function NavBar() {
             to="/panel"
           >
             <Dash /> dashboard
+          </Link>
+          <Link
+            className="py-4 flex w-full px-3 items-center gap-3 cursor-pointer"
+            to="/panel/Ordenes"
+          >
+            <AssignmentIcon /> Ordenes
           </Link>
           <Box icon={<Menu />} title="Menu">
             <Content path="/panel/catalogo">Catalogo</Content>

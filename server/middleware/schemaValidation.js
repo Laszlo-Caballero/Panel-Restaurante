@@ -24,8 +24,16 @@ export const ValidationUpdate = async (req, res, next) => {
     const token = req.cookies.token;
     const data = await accessToken(token);
     const { jsonData } = req.body;
-    const { id, nombre, precio, estado, descripcion, vendidos } =
-      JSON.parse(jsonData);
+    const {
+      id,
+      nombre,
+      precio,
+      estado,
+      descripcion,
+      vendidos,
+      categoria,
+      sku,
+    } = JSON.parse(jsonData);
 
     menuSchema.parse({
       id,

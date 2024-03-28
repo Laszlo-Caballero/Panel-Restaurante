@@ -1,11 +1,11 @@
-import TablaEdit from "../components/tabla";
-import useGet from "../hooks/useGet";
+import TablaEdit from "../../components/tabla";
+import useGet from "../../hooks/useGet";
 import { createColumnHelper } from "@tanstack/react-table";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useState, useEffect } from "react";
-import AgregarComida from "../components/forms/agregar";
-import ActaulizarComida from "../components/forms/actualizar";
+import AgregarComida from "../../components/forms/agregar";
+import ActaulizarComida from "../../components/forms/actualizar";
 
 function Editar() {
   const columnHelper = createColumnHelper();

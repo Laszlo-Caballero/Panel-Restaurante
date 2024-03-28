@@ -23,3 +23,11 @@ export function Content({ children, path }) {
     </Link>
   );
 }
+
+export function Info({ title, info, className }) {
+  return (
+    <p className={`flex justify-between p-4 border-t border-neutral-800`}>
+      {title} <span className={className}>{info}</span>
+    </p>
+  );
+}

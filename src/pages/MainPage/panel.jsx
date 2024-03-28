@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "../../components/navbar";
-import Home from "../home";
-import Editar from "../editar";
-import Catalogo from "../catalogo";
-import PanelComida from "../comida";
+import Home from "./home";
+import Editar from "../comidas/editar";
+import Catalogo from "../comidas/catalogo";
+import PanelComida from "../comidas/comida";
 import ProtecterRoute from "../../components/ProtecterRoute";
 import UserNavBar from "../../components/userNavBar";
 import { useSelector } from "react-redux";
