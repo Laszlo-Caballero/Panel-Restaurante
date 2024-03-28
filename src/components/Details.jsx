@@ -1,5 +1,6 @@
 import Arrow from "./../images/downarrow.svg?react";
 import { Link } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 export function Box({ icon, title, children }) {
   return (
     <>
@@ -40,5 +41,24 @@ export function Links({ icon, path, children }) {
     >
       <span>{icon}</span> {children}
     </Link>
+  );
+}
+
+export function Order({ nombre, cantidad, precio, onClick }) {
+  return (
+    <section className="flex justify-between border border-nepal-800 px-6 py-2 rounded-3xl mb-4 items-center">
+      <div className="flex w-1/2 gap-12 items-center font-WorkSansregular">
+        <p className="flex flex-col">
+          Producto: <span>{nombre}</span>
+        </p>
+        <p className="flex flex-col">
+          Cantidad: <span>{cantidad}</span>
+        </p>
+        <p className="flex flex-col">
+          Precio: <span>${precio * cantidad}</span>
+        </p>
+      </div>
+      <CloseIcon onClick={onClick} sx={{ cursor: "pointer" }} />
+    </section>
   );
 }
