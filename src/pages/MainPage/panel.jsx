@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "../../components/navbar";
 import Home from "./home";
@@ -11,8 +11,32 @@ import { useSelector } from "react-redux";
 import ProtectedAdmin from "../../components/ProtectedAdmin";
 import Pedir from "../Ordenes/Pedir";
 import Ordenes from "../Ordenes/Ordenes";
+import { io } from "socket.io-client";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Panel() {
   const stateNav = useSelector((state) => state.nav);
+  useEffect(() => {
+    const socket = io("http://localhost:3000");
+    socket.on("nueva Orden", () => {
+      console.log("nueva orden");
+      toast.success("Nueva Orden", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    });
+    return () => {
+      // Limpiar la suscripción cuando el componente se desmonte
+      socket.off("nueva Orden");
+    };
+  }, []);
   return (
     <>
       {stateNav && <NavBar />}
@@ -33,6 +57,7 @@ export default function Panel() {
             <Route path="/register" element={<h1>admin</h1>} />
           </Route>
         </Routes>
+        <ToastContainer />
       </main>
     </>
   );

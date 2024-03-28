@@ -24,12 +24,14 @@ export const loginSchema = z.object({
 
 export const ordenSchema = z.object({
   mesa: z.number().positive(),
-  data: z.array(
-    z.object({
-      sku: z.number().positive(),
-      nombre: z.string(),
-      precio: z.number().positive(),
-      cantidad: z.number().positive(),
-    })
-  ),
+  data: z
+    .array(
+      z.object({
+        sku: z.number().positive(),
+        nombre: z.string(),
+        precio: z.number().positive(),
+        cantidad: z.number().positive(),
+      })
+    )
+    .min(1),
 });

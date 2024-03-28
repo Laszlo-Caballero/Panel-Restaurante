@@ -3,6 +3,7 @@ import cors from "cors";
 import { createServer } from "node:http";
 import routesM from "./routes/menu.js";
 import routesU from "./routes/auth.js";
+import routesO from "./routes/ordenes.js";
 import bodyParser from "body-parser";
 import EliminarOtros from "./utils/eliminar.js";
 import cookieParser from "cookie-parser";
@@ -22,6 +23,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/menu", routesM);
 app.use("/users", routesU);
+app.use("/ordenes", routesO);
+
 app.use(express.static("storage"));
 
 server.listen(3000, () => {

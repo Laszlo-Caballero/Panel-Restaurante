@@ -77,3 +77,15 @@ export const ValidationLogin = (req, res, next) => {
     });
   }
 };
+
+export const ValidationGet = async (req, res, next) => {
+  const token = req.cookies.token;
+  console.log(token);
+  if (!token) res.status(401).json({ message: "401 Unauthorized" });
+  try {
+    await accessToken(token);
+    next();
+  } catch (error) {
+    res.status(401).send(error);
+  }
+};

@@ -9,7 +9,7 @@ import useGet from "../../hooks/useGet";
 
 function Pedir() {
   const [orders, setOrders] = useState([]);
-  const [table, setTable] = useState(0);
+  const [table, setTable] = useState(1);
   const [socket, setSocket] = useState(null);
   const data = useGet("menu");
   useEffect(() => {
@@ -34,11 +34,11 @@ function Pedir() {
       mesa: parseInt(table),
       data: orders,
     };
-    socket.emit("ordenes", emitData);
     reset();
     setOrders([]);
     setTable(1);
     console.log(emitData);
+    socket.emit("ordenes", emitData);
   };
   return (
     <article className="p-8">

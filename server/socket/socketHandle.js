@@ -8,13 +8,13 @@ export function initializeSocket(server) {
       origin: "http://localhost:5173",
     },
   });
+
   io.on("connection", (socket) => {
     socket.on("ordenes", (orden) => {
       try {
-        console.log(orden);
         ordenSchema.parse(orden);
         Ordenes.push(orden);
-        console.log("Ordenes", Ordenes);
+        io.emit("nueva Orden");
       } catch (error) {
         console.log(error);
       }
