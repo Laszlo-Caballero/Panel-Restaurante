@@ -6,6 +6,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default async function ConvertirWebp(file) {
+  if (file.filename.split(".").pop() == ".webp") {
+    return;
+  }
   const outputPath = path.join(
     __dirname,
     `../storage/${file.filename.split(".").shift()}.webp`
