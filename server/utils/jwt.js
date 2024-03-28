@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { PasswordJWT } from "./const.js";
+import connectDatabase from "../config/mysql.js";
 
 export function createAccessToken(payload) {
   return new Promise((resolve, reject) => {
@@ -8,6 +9,27 @@ export function createAccessToken(payload) {
         reject(error);
       }
       resolve(token);
+    });
+  });
+}
+
+export function accessToken(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, PasswordJWT, async (err, user) => {
+      if (err) {
+        return reject("Unauthorized");
+      }
+      const database = await connectDatabase();
+
+      const [rows, fields] = await database.execute(
+        "Select tipo from usuarios Where id = ?",
+        [user]
+      );
+      const data = rows[0];
+      if (!data) {
+        return reject("Unauthorized");
+      }
+      resolve(data);
     });
   });
 }
