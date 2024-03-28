@@ -2,7 +2,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { LabelForm, Error, InputForm, Slider } from "./form";
 import Modal from "../modal/modal";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios from "../../utils/axios";
 import useGet from "../../hooks/useGet";
 
 function ActaulizarComida({ setModalForms, id }) {
@@ -23,7 +23,6 @@ function ActaulizarComida({ setModalForms, id }) {
     },
   });
 
-  const url = "http://localhost:3000/menu/actualizar";
   const onSubmit = handleSubmit((data) => {
     console.log(data);
     const formData = new FormData();
@@ -40,7 +39,7 @@ function ActaulizarComida({ setModalForms, id }) {
     );
     formData.append("file", data.file[0]);
     axios
-      .put(url, formData)
+      .put("/menu/actualizar", formData)
       .then((response) => {
         console.log(response.data);
         setModalForms(false);

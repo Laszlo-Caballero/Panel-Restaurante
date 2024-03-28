@@ -3,7 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { LabelForm, Error, InputForm, Slider, Loader } from "..//forms/form";
 import Modal from "./../modal/modal";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useState } from "react";
 
 function AgregarComida({ setModalForms }) {
@@ -14,7 +14,6 @@ function AgregarComida({ setModalForms }) {
     watch,
     reset,
   } = useForm();
-  const url = "http://localhost:3000/menu/insertar";
   const [loader, setLoader] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const onSubmit = handleSubmit((data) => {
@@ -32,7 +31,7 @@ function AgregarComida({ setModalForms }) {
     );
     formData.append("file", data.file[0]);
     axios
-      .post(url, formData)
+      .post("/menu/insertar", formData)
       .then((response) => {
         console.log(response.data);
         setLoader(false);
