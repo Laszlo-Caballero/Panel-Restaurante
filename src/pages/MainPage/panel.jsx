@@ -9,6 +9,7 @@ import ProtecterRoute from "../../components/ProtecterRoute";
 import UserNavBar from "../../components/userNavBar";
 import { useSelector } from "react-redux";
 import ProtectedAdmin from "../../components/ProtectedAdmin";
+import Pedir from "../Ordenes/Pedir";
 export default function Panel() {
   const stateNav = useSelector((state) => state.nav);
   return (
@@ -22,6 +23,7 @@ export default function Panel() {
             <Route path="/editar" element={<Editar />} />
             <Route path="/catalogo" element={<Catalogo />} />
             <Route path="/menu/:id" element={<PanelComida />} />
+            <Route path="/Pedir" element={<Pedir />} />
             <Route path="/profile" element={<h1>perfil</h1>} />
             <Route path="/settings" element={<h1>configurar Usuario</h1>} />
           </Route>
