@@ -1,6 +1,11 @@
 import { menuSchema, userSchema, loginSchema } from "../utils/validation.js";
-export const ValidationMenu = (req, res, next) => {
+import { accessToken } from "../utils/jwt.js";
+
+export const ValidationMenu = async (req, res, next) => {
   try {
+    const token = req.cookies.token;
+    const data = await accessToken(token);
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
     const { jsonData } = req.body;
     const { nombre, precio, estado, descripcion } = JSON.parse(jsonData);
     menuSchema.parse({ nombre, precio, estado, descripcion });
@@ -13,8 +18,10 @@ export const ValidationMenu = (req, res, next) => {
   }
 };
 
-export const ValidationUpdate = (req, res, next) => {
+export const ValidationUpdate = async (req, res, next) => {
   try {
+    const token = req.cookies.token;
+    const data = await accessToken(token);
     const { jsonData } = req.body;
     const { id, nombre, precio, estado, descripcion, vendidos } =
       JSON.parse(jsonData);
