@@ -9,12 +9,13 @@ import {
 export async function EnviarComida(req, res) {
   const { file } = req;
   const { jsonData } = req.body;
-  const { nombre, precio, estado, descripcion } = JSON.parse(jsonData);
+  const { nombre, precio, estado, descripcion, categoria, sku } =
+    JSON.parse(jsonData);
 
   try {
     const img = file.filename.split(".").shift();
     await ConvertirWebp(file);
-    await subirComida(nombre, precio, img, estado, descripcion);
+    await subirComida(nombre, precio, img, estado, descripcion, categoria, sku);
     res.send("se envio");
     console.log("se envio");
   } catch (error) {
@@ -26,7 +27,7 @@ export async function EnviarComida(req, res) {
 export async function ActualizarComida(req, res) {
   const { file } = req;
   const { jsonData } = req.body;
-  const { id, nombre, precio, estado, descripcion, vendidos } =
+  const { id, nombre, precio, estado, descripcion, vendidos, categoria, sku } =
     JSON.parse(jsonData);
   if (file) {
     try {
@@ -39,7 +40,9 @@ export async function ActualizarComida(req, res) {
         img,
         vendidos,
         estado,
-        descripcion
+        descripcion,
+        categoria,
+        sku
       );
       res.send("se actualizo");
       console.log("se actualizo");
@@ -49,7 +52,16 @@ export async function ActualizarComida(req, res) {
     }
   } else {
     try {
-      await actualizarComida(id, nombre, precio, vendidos, estado, descripcion);
+      await actualizarComida(
+        id,
+        nombre,
+        precio,
+        vendidos,
+        estado,
+        descripcion,
+        categoria,
+        sku
+      );
       res.send("se actualizo");
       console.log("se actualizo");
     } catch (error) {

@@ -20,6 +20,8 @@ function ActaulizarComida({ setModalForms, id }) {
       descripcion: values[0] && values[0].descripcion,
       estado: values[0] && values[0].status != 0 ? true : false,
       vendidos: values[0] && values[0].vendidos,
+      categoria: values[0] && values[0].categoria,
+      sku: values[0] && values[0].sku,
     },
   });
 
@@ -35,6 +37,8 @@ function ActaulizarComida({ setModalForms, id }) {
         estado: data.estado,
         descripcion: data.descripcion,
         vendidos: data.vendidos,
+        categoria: data.categoria,
+        sku: parseInt(data.sku),
       })
     );
     formData.append("file", data.file[0]);
@@ -49,7 +53,7 @@ function ActaulizarComida({ setModalForms, id }) {
       });
   });
   return (
-    <Modal className="w-[60em] h-[50em]  rounded-xl p-8 flex flex-col gap-y-8">
+    <Modal className="w-[60em] h-[50em]  rounded-xl flex flex-col gap-y-8">
       <div
         className="absolute top-2 right-2 text-white cursor-pointer"
         onClick={() => {
@@ -132,7 +136,7 @@ function ActaulizarComida({ setModalForms, id }) {
               <LabelForm name="Estado" title="Estado disponible" />
               <Slider require={register("estado")} />
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full mb-2">
               <LabelForm name="Vendidos" title="Cantidad de Vendidos" />
               <InputForm
                 name="Vendidos"
@@ -150,6 +154,37 @@ function ActaulizarComida({ setModalForms, id }) {
                 })}
               />
               {errors.vendidos && <Error error={errors.vendidos.message} />}
+              <LabelForm name="Categoria" title="Categoria" />
+              <select
+                name="Cataegoria"
+                className="px-2 py-1"
+                {...register("categoria", {
+                  validate: (value) => {
+                    return value != "none" || "La categoria es Obligatoria";
+                  },
+                })}
+              >
+                <option value="none"></option>
+                <option value="Vegetariana">Vegetariana</option>
+                <option value="Carnes">Carnes</option>
+                <option value="Variados">Variados</option>
+              </select>
+              {errors.categoria && <Error error={errors.categoria.message} />}
+              <LabelForm name="Sku" title="Sku" />
+              <InputForm
+                name="Sku"
+                type="text"
+                require={register("sku", {
+                  required: {
+                    value: true,
+                    message: "El Sku es Obligatorio",
+                  },
+                  validate: (value) => {
+                    return !isNaN(value) || "El Sku debe ser un Numero";
+                  },
+                })}
+              />
+              {errors.sku && <Error error={errors.sku.message} />}
             </div>
           </div>
           <button

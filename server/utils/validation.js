@@ -7,6 +7,8 @@ export const menuSchema = z.object({
   estado: z.boolean(),
   descripcion: z.string().min(100),
   vendidos: z.number().nonnegative().optional(),
+  categoria: z.string(),
+  sku: z.number().positive(),
 });
 
 export const userSchema = z.object({
