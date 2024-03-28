@@ -12,8 +12,15 @@ export function Error({ error }) {
   return <span className="py-1 text-base font-WorkSansmedium">{error}</span>;
 }
 
-export function InputForm({ type, name, require }) {
-  return <input type={type} name={name} {...require} className="rounded" />;
+export function InputForm({ type, name, require, className }) {
+  return (
+    <input
+      type={type}
+      name={name}
+      {...require}
+      className={`rounded ${className}`}
+    />
+  );
 }
 
 export function Slider({ require }) {
