@@ -31,3 +31,14 @@ export function Info({ title, info, className }) {
     </p>
   );
 }
+
+export function Links({ icon, path, children }) {
+  return (
+    <Link
+      className="py-4 flex w-full px-4 items-center gap-3 cursor-pointer"
+      to={path}
+    >
+      <span>{icon}</span> {children}
+    </Link>
+  );
+}
