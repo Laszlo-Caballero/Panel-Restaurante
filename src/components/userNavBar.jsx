@@ -1,23 +1,28 @@
-import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import iconUser from "../assets/userIcon.webp";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch } from "react-redux";
 import { openClose } from "../context/feature/navSlice";
+import { resetAdmin } from "../context/feature/adminSlice";
+import { resetAuthAdmin } from "../context/feature/autenticateAdminSlice";
+import { resetAuth } from "../context/feature/autenticateSlice";
+import { resetToken } from "../context/feature/cookieSlice";
+import { resetLoadAdmin } from "../context/feature/loadingAdmin";
+import { resetLoad } from "../context/feature/loadingSlice";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PowerSettingsNewOutlinedIcon from "@mui/icons-material/PowerSettingsNewOutlined";
 import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 export default function UserNavBar() {
   const value = useSelector((state) => state.user);
   const user = value[0];
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
-  const [isLogout, setLogout] = useState(false);
 
   return (
     <nav className="px-4 py-5 flex items-center justify-between w-full shadow-user bg-white ">
@@ -63,7 +68,14 @@ export default function UserNavBar() {
             <button
               className="text-start pt-4 mb-4 flex items-center gap-x-2 border-t pl-2"
               onClick={() => {
-                setLogout(true);
+                Cookies.remove("token");
+                dispatch(resetAdmin());
+                dispatch(resetAuthAdmin());
+                dispatch(resetAuth());
+                dispatch(resetToken());
+                dispatch(resetLoadAdmin());
+                dispatch(resetLoad());
+                navigate("/");
               }}
             >
               <PowerSettingsNewOutlinedIcon />
@@ -72,7 +84,6 @@ export default function UserNavBar() {
           </section>
         )}
       </div>
-      {isLogout && <Navigate to="/" />}
     </nav>
   );
 }

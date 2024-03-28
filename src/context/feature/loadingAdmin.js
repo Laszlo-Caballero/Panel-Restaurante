@@ -7,11 +7,11 @@ export const loadingAdminSlice = createSlice({
     setLoading: (state, action) => {
       return action.payload;
     },
-    reset: (state, action) => {
+    resetLoadAdmin: (state, action) => {
       return true;
     },
   },
 });
 
-export const { setLoading, reset } = loadingAdminSlice.actions;
+export const { setLoading, resetLoadAdmin } = loadingAdminSlice.actions;
 export default loadingAdminSlice.reducer;
