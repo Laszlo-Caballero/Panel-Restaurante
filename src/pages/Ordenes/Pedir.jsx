@@ -2,10 +2,10 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
-import { LabelForm } from "../../components/forms/form";
+import { LabelForm } from "components/forms/form";
 import { useForm } from "react-hook-form";
-import { Order } from "../../components/Details";
-import useGet from "../../hooks/useGet";
+import { Order } from "components/Details";
+import useGet from "src/hooks/useGet";
 
 function Pedir() {
   const [orders, setOrders] = useState([]);

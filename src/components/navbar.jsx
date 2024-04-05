@@ -1,8 +1,8 @@
-import Logo from "./../images/logo.jpg";
+import Logo from "images/logo.jpg";
 import { Box, Content, Links } from "./Details";
-import Dash from "./../images/dash.svg?react";
-import Menu from "./../images/box.svg?react";
-import Table from "./../images/tables.svg?react";
+import Dash from "images/dash.svg?react";
+import Menu from "images/box.svg?react";
+import Table from "images/tables.svg?react";
 import CreateIcon from "@mui/icons-material/Create";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import TableBarIcon from "@mui/icons-material/TableBar";

@@ -1,5 +1,5 @@
-import Logo from "./../images/login.webp";
-import { InputForm, LabelForm, Error, Loader } from "../components/forms/form";
+import Logo from "src/images/login.webp";
+import { InputForm, LabelForm, Error, Loader } from "components/forms/form";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "../utils/axios";

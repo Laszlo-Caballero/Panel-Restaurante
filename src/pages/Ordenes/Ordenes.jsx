@@ -2,7 +2,7 @@ import React from "react";
 import { io } from "socket.io-client";
 import { useEffect } from "react";
 import { useState } from "react";
-import axios from "../../utils/axios";
+import axios from "src/utils/axios";
 
 export default function Ordenes() {
   const [Ordenes, setOrdenes] = useState([]);

@@ -1,9 +1,9 @@
-import Hamburgesa from "./../../assets/hamburgesa.jpg";
+import Hamburgesa from "src/assets/hamburgesa.jpg";
 import CloseIcon from "@mui/icons-material/Close";
-import { LabelForm, Error, InputForm, Slider, Loader } from "..//forms/form";
-import Modal from "./../modal/modal";
+import { LabelForm, Error, InputForm, Slider, Loader } from "../forms/form";
+import Modal from "../modal/modal";
 import { useForm } from "react-hook-form";
-import axios from "../../utils/axios";
+import axios from "src/utils/axios";
 import { useState } from "react";
 
 function AgregarComida({ setModalForms }) {

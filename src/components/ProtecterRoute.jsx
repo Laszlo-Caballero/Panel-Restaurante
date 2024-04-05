@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser, deleteUser } from "../context/feature/userSlice";
-import { setLoading } from "../context/feature/loadingSlice";
-import { setAutenticate } from "../context/feature/autenticateSlice";
-import axios from "../utils/axios";
+import { setUser, deleteUser } from "context/feature/userSlice";
+import { setLoading } from "context/feature/loadingSlice";
+import { setAutenticate } from "context/feature/autenticateSlice";
+import axios from "src/utils/axios";
 import Cookies from "js-cookie";
 
 export default function ProtecterRoute({ children }) {

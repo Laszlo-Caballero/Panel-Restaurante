@@ -1,4 +1,4 @@
-import Arrow from "./../images/downarrow.svg?react";
+import Arrow from "images/downarrow.svg?react";
 import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 export function Box({ icon, title, children }) {

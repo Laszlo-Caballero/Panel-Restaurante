@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setLoading } from "../context/feature/loadingAdmin";
-import { setAutenticate } from "../context/feature/autenticateAdminSlice";
-import axios from "../utils/axios";
+import { setLoading } from "context/feature/loadingAdmin";
+import { setAutenticate } from "context/feature/autenticateAdminSlice";
+import axios from "src/utils/axios";
 import Cookies from "js-cookie";
 
 function ProtectedAdmin({ children }) {

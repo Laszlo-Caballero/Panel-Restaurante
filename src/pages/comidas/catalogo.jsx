@@ -1,5 +1,5 @@
-import useGet from "../../hooks/useGet";
-import Comida from "../../components/Comida";
+import useGet from "src/hooks/useGet";
+import Comida from "components/Comida";
 
 function Catalogo() {
   const values = useGet("menu");

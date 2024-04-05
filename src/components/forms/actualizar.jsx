@@ -2,8 +2,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { LabelForm, Error, InputForm, Slider } from "./form";
 import Modal from "../modal/modal";
 import { useForm } from "react-hook-form";
-import axios from "../../utils/axios";
-import useGet from "../../hooks/useGet";
+import axios from "src/utils/axios";
+import useGet from "src/hooks/useGet";
 
 function ActaulizarComida({ setModalForms, id }) {
   const values = useGet(`menu/comida/${id}`);

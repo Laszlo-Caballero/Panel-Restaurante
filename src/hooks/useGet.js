@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../utils/axios";
+import axios from "src/utils/axios";
 
 export default function useGet(ruta, update = []) {
   const [values, setValues] = useState([]);

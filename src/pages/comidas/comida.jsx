@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import useGet from "../../hooks/useGet";
-import { Info } from "../../components/Details";
+import useGet from "src/hooks/useGet";
+import { Info } from "components/Details";
 import CampaignIcon from "@mui/icons-material/Campaign";
 
 function PanelComida() {
