@@ -15,7 +15,9 @@ export function initializeSocket(server) {
         ordenSchema.parse(orden);
         Ordenes.push(orden);
         io.emit("nueva Orden");
+        io.emit("Ordenes", Ordenes);
       } catch (error) {
+        io.emit("Error");
         console.log(error);
       }
     });

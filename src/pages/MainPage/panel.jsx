@@ -32,9 +32,22 @@ export default function Panel() {
         transition: Bounce,
       });
     });
+    socket.on("Error", () => {
+      toast.error("Error", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    });
     return () => {
-      // Limpiar la suscripción cuando el componente se desmonte
       socket.off("nueva Orden");
+      socket.off("Error");
     };
   }, []);
   return (
