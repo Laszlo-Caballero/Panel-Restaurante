@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { PasswordJWT } from "../const.js";
-import connectDatabase from "../config/mysql.js";
+import { connectDatabase, exectQuery } from "../config/mysql.js";
 
 export function createAccessToken(payload) {
   return new Promise((resolve, reject) => {
@@ -19,12 +19,12 @@ export function accessToken(token) {
       if (err) {
         return reject("Unauthorized");
       }
-      const database = await connectDatabase();
 
-      const [rows, fields] = await database.execute(
-        "Select tipo from usuarios Where id = ?",
+      const rows = await exectQuery(
+        "Select tipo from Usuario Where email = ?",
         [user]
       );
+
       const data = rows[0];
       if (!data) {
         return reject("Unauthorized");

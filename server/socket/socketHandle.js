@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { ordenSchema } from "../utils/schemas.js";
+import { ordenSchema } from "../utils/validation.js";
 
 export let Ordenes = [];
 export function initializeSocket(server) {

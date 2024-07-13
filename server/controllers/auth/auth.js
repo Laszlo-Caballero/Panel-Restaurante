@@ -1,20 +1,18 @@
 import bcrypt from "bcryptjs";
-import connectDatabase from "../../config/mysql.js";
-import { createAccessToken } from "../../utils/jwt.js";
-import jwt from "jsonwebtoken";
-import { PasswordJWT } from "../../const.js";
+import { exectQuery } from "../../config/mysql.js";
+import { createAccessToken, accessToken } from "../../utils/jwt.js";
 
 export async function Register(req, res) {
   const { nombre, email, contraseña } = req.body;
   try {
     const hash = await bcrypt.hash(contraseña, 10);
-    const database = await connectDatabase();
-    const [result] = await database.query(
+
+    const result = await exectQuery(
       "INSERT INTO Usuario(nombre, email, contraseña) VALUES (?,?,?)",
       [nombre, email, hash]
     );
-    const id = result.insertId;
-    const token = await createAccessToken(id.toString());
+
+    const token = await createAccessToken(email);
     res.cookie("token", token);
     res.send({
       message: "Se Registro",
@@ -29,64 +27,52 @@ export async function Register(req, res) {
 export async function Login(req, res) {
   const { email, contraseña } = req.body;
   try {
-    const database = await connectDatabase();
-    const [rows, fields] = await database.execute(
-      "Select * from usuarios Where email = ?",
+    const rows = await exectQuery(
+      "Select nombre, email, contraseña, tipo, imagen from Usuario Where email = ?",
       [email]
     );
-    const rowsbolean = rows ? true : false;
-    if (!rowsbolean) return res.status(404).send("Not found");
+
+    console.log(rows);
+
+    if (!rows) return res.status(404).send("Not found");
+
     const data = rows[0];
+
     const isMatch = await bcrypt.compare(contraseña, data.contraseña);
+
     if (!isMatch) return res.status(404).send("Error password");
-    const token = await createAccessToken(data.id.toString());
+
+    const token = await createAccessToken(data.email);
+
     res.cookie("token", token);
-    let user = { ...data };
-    delete user.id;
-    res.json(user);
+
+    res.json(data);
   } catch (error) {
+    console.log(error);
     res.status(404).send("Not found");
   }
 }
 
 export async function Validate(req, res) {
   const token = req.cookies.token;
-  const database = await connectDatabase();
+
   if (!token) return res.status(401).json({ message: "Unauthorized" });
 
-  jwt.verify(token, PasswordJWT, async (err, user) => {
-    if (err) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
+  const data = await accessToken(token);
 
-    const [rows, fields] = await database.execute(
-      "Select nombre, email, contraseña, tipo, imagen from usuarios Where id = ?",
-      [user]
-    );
-    const data = rows[0];
-    if (!data) return res.status(401).json({ message: "Unauthorized" });
-    let retorno = { ...data };
-    delete retorno.id;
-    return res.json(retorno);
-  });
+  if (!data) res.status(401).json({ message: "Unauthorized" });
+
+  res.json(data);
 }
 
 export async function ValidateAdmin(req, res) {
   const token = req.cookies.token;
-  const database = await connectDatabase();
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
-  jwt.verify(token, PasswordJWT, async (err, user) => {
-    if (err) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
 
-    const [rows, fields] = await database.execute(
-      "Select tipo from usuarios Where id = ?",
-      [user]
-    );
-    const data = rows[0];
-    if (!data || data.tipo != "admin")
-      return res.status(401).json({ message: "Unauthorized" });
-    return res.json(data);
-  });
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+  const data = await accessToken(token);
+
+  if (!data && data.tipo != "admin")
+    return res.status(401).json({ message: "Unauthorized" });
+  return res.json(data);
 }
