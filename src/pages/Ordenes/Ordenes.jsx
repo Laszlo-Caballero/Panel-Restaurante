@@ -21,5 +21,15 @@ export default function Ordenes() {
       });
   }, []);
 
-  return <div>{Ordenes.length}</div>;
+  return (
+    <section className="p-8">
+      <div>
+        <p>Orden 1</p>
+        <p>mesa 2</p>
+        <ul className="pl-10 list-auto">
+          <li>asda</li>
+        </ul>
+      </div>
+    </section>
+  );
 }
