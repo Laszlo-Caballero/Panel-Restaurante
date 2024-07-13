@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import connectDatabase from "../../config/mysql.js";
 import { createAccessToken } from "../../utils/jwt.js";
 import jwt from "jsonwebtoken";
-import { PasswordJWT } from "../../utils/const.js";
+import { PasswordJWT } from "../../const.js";
 
 export async function Register(req, res) {
   const { nombre, email, contraseña } = req.body;
@@ -10,7 +10,7 @@ export async function Register(req, res) {
     const hash = await bcrypt.hash(contraseña, 10);
     const database = await connectDatabase();
     const [result] = await database.query(
-      "INSERT INTO usuarios(nombre, email, contraseña) VALUES (?,?,?)",
+      "INSERT INTO Usuario(nombre, email, contraseña) VALUES (?,?,?)",
       [nombre, email, hash]
     );
     const id = result.insertId;

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { PasswordJWT } from "./const.js";
+import { PasswordJWT } from "../const.js";
 import connectDatabase from "../config/mysql.js";
 
 export function createAccessToken(payload) {
