@@ -1,6 +1,11 @@
 import express from "express";
 import subirArchivo from "./../config/subirImagen.js";
-import { EnviarComida, Food, Menu } from "../controllers/menu/Menu.js";
+import {
+  EnviarComida,
+  Food,
+  Menu,
+  Categorias,
+} from "../controllers/menu/Menu.js";
 import {
   ValidationMenu,
   ValidationUpdate,
@@ -25,6 +30,7 @@ router.put(
 */
 
 router.get("/", Menu);
+router.get("/categoria", Categorias);
 router.get("/comida/:id", Food);
 
 export default router;

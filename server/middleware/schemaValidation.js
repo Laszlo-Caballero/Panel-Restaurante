@@ -7,9 +7,9 @@ export const ValidationMenu = async (req, res, next) => {
     const data = await accessToken(token);
     if (!token) return res.status(401).json({ message: "Unauthorized" });
     const { jsonData } = req.body;
-    const { nombre, precio, estado, descripcion, categoria, sku } =
+    const { nombre, precio, estado, descripcion, categoria } =
       JSON.parse(jsonData);
-    menuSchema.parse({ nombre, precio, estado, descripcion, categoria, sku });
+    menuSchema.parse({ nombre, precio, estado, descripcion, categoria });
     next();
   } catch (error) {
     console.log(error);

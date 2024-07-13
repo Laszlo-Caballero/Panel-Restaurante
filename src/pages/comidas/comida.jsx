@@ -6,6 +6,7 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 function PanelComida() {
   const { id } = useParams();
   const values = useGet(`menu/comida/${id}`)[0];
+  console.log(values);
   return (
     <article className="p-8">
       <header>
@@ -17,7 +18,12 @@ function PanelComida() {
         <article className="flex w-full justify-between">
           <div className="relative pl-4 w-2/5">
             <img
-              src={values && `http://localhost:3000/${values.img}.webp`}
+              src={
+                values &&
+                `http://localhost:3000/${
+                  values && values.images[0].ImagenPath
+                }.webp`
+              }
               alt="Producto-Imagen"
               className="w-full"
             />
@@ -30,7 +36,19 @@ function PanelComida() {
               Informacion del Producto
             </h4>
             <Info title="Precio" info={`$ ${values && values.precio}`} />
-            <Info title="Categoria" info={values && values.categoria} />
+
+            <div className="flex justify-between p-4 border-t border-neutral-800 flex-col">
+              <p className="mb-2">Categorias: </p>
+              {values &&
+                values.categorias.map((value) => {
+                  return (
+                    <div className="bg-nepal-300 w-auto rounded-xl p-2 mb-2">
+                      {value.categoria}
+                    </div>
+                  );
+                })}
+            </div>
+
             <Info
               title="Estado"
               info="En Stock"

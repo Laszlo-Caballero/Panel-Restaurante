@@ -5,6 +5,7 @@ import Modal from "../modal/modal";
 import { useForm } from "react-hook-form";
 import axios from "src/utils/axios";
 import { useState } from "react";
+import useGet from "src/hooks/useGet";
 
 function AgregarComida({ setModalForms }) {
   const {
@@ -16,6 +17,7 @@ function AgregarComida({ setModalForms }) {
   } = useForm();
   const [loader, setLoader] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
+  const categorias = useGet("menu/categoria");
   const onSubmit = handleSubmit((data) => {
     console.log(data);
     const formData = new FormData();
@@ -28,7 +30,6 @@ function AgregarComida({ setModalForms }) {
         estado: data.estado,
         descripcion: data.descripcion,
         categoria: data.categoria,
-        sku: parseInt(data.sku),
       })
     );
     formData.append("file", data.file[0]);
@@ -44,7 +45,7 @@ function AgregarComida({ setModalForms }) {
       });
   });
   return (
-    <Modal className="w-[60em] h-[50em] flex flex-col gap-y-8">
+    <Modal className="w-[60em] h-[40em] flex flex-col gap-y-8">
       <div
         className="absolute top-2 right-2 text-white cursor-pointer"
         onClick={() => {
@@ -149,31 +150,20 @@ function AgregarComida({ setModalForms }) {
                 })}
               >
                 <option value="none"></option>
-                <option value="Vegetariana">Vegetariana</option>
-                <option value="Carnes">Carnes</option>
-                <option value="Variados">Variados</option>
+                {categorias.map((item) => {
+                  return (
+                    <option key={item.idCategoria} value={item.categoria}>
+                      {item.categoria}
+                    </option>
+                  );
+                })}
               </select>
               {errors.categoria && <Error error={errors.categoria.message} />}
-              <LabelForm name="Sku" title="Sku" />
-              <InputForm
-                name="Sku"
-                type="text"
-                require={register("sku", {
-                  required: {
-                    value: true,
-                    message: "El Sku es Obligatorio",
-                  },
-                  validate: (value) => {
-                    return !isNaN(value) || "El Sku debe ser un Numero";
-                  },
-                })}
-              />
-              {errors.sku && <Error error={errors.sku.message} />}
             </div>
           </div>
           <button
             type="submit"
-            className="px-8 py-4 bg-nepal-700 rounded-lg font-WorkSansmedium text-nepal-100 mt-0"
+            className="px-8 py-2 mt-6 bg-nepal-700 rounded-lg font-WorkSansmedium text-nepal-100"
           >
             enviar
           </button>

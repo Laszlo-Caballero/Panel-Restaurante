@@ -14,8 +14,8 @@ function Catalogo() {
               nombre={element.nombre}
               precio={element.precio}
               vendido={element.vendidos}
-              id={element.id}
-              key={element.id}
+              id={element.idComida}
+              key={element.idComida}
             />
           );
         })}

@@ -10,7 +10,36 @@ export async function EnviarComida(req, res) {
   try {
     const img = file.filename.split(".").shift();
     await ConvertirWebp(file);
-    await subirComida(nombre, precio, img, estado, descripcion, categoria, sku);
+
+    const categoryId = await exectQuery(
+      "select idCategoria from categoria where categoria = ?",
+      [categoria]
+    );
+
+    console.log(categoryId);
+
+    const imgUpload = await exectQuery(
+      "Insert into Imagen (imagenPath) values (?)",
+      [img]
+    );
+
+    const FoodUpload = await exectQuery(
+      "insert into Comida (nombre, precio, estado, descripcion) values(?,?,?,?)",
+      [nombre, precio, estado, descripcion]
+    );
+
+    console.log(FoodUpload.insertId, categoryId[0].idCategoria);
+    const id = categoryId[0].idCategoria;
+    await exectQuery(
+      "insert into categoriacomida (idCategoria, idComida) values (?,?)",
+      [id, FoodUpload.insertId]
+    );
+
+    await exectQuery(
+      "Insert into imagencomida (idComida, idImagen) values (?,?)",
+      [FoodUpload.insertId, imgUpload.insertId]
+    );
+
     res.send("se envio");
     console.log("se envio");
   } catch (error) {
@@ -68,9 +97,21 @@ export async function EnviarComida(req, res) {
 
 */
 
+export async function Categorias(req, res) {
+  try {
+    const rows = await exectQuery("select * from categoria", []);
+    res.send(rows);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
 export async function Menu(req, res) {
   try {
-    const rows = await exectQuery("select * from comida", []);
+    const rows = await exectQuery(
+      "select C.idComida , (select I.imagenPath from imagencomida as IC inner join Imagen as I on I.idImagen = IC.idImagen where C.idComida = IC.IdComida limit 1) as img, C.nombre, Round(C.precio, 2) as precio, C.estado, C.descripcion, C.vendidos from Comida as C",
+      []
+    );
     res.send(rows);
   } catch (error) {
     res.status(404).send(error);
@@ -78,14 +119,26 @@ export async function Menu(req, res) {
 }
 
 export async function Food(req, res) {
-  const database = await connectDatabase();
   const { id } = req.params;
   try {
-    const [rows, fields] = await database.execute(
-      "Select * from comida where id = ?",
+    const foods = await exectQuery("Select * from comida where idComida = ?", [
+      id,
+    ]);
+
+    const category = await exectQuery(
+      "select C.idCategoria, C.categoria from Categoria as C inner join CategoriaComida as CC on C.idCategoria = CC.idCategoria where CC.idComida = ?",
       [id]
     );
-    res.send(rows);
+
+    const images = await exectQuery(
+      "select IC.idImagen,I.ImagenPath from imagencomida as IC inner join imagen as I on  IC.idImagen = I.idImagen where IC.idComida = ?",
+      [id]
+    );
+
+    foods[0].categorias = category;
+    foods[0].images = images;
+
+    res.send(foods);
   } catch (error) {
     res.status(404).send(error);
   }
