@@ -32,8 +32,6 @@ export async function Login(req, res) {
       [email]
     );
 
-    console.log(rows);
-
     if (!rows) return res.status(404).send("Not found");
 
     const data = rows[0];
@@ -48,7 +46,6 @@ export async function Login(req, res) {
 
     res.json(data);
   } catch (error) {
-    console.log(error);
     res.status(404).send("Not found");
   }
 }

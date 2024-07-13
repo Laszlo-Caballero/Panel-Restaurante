@@ -1,9 +1,10 @@
 import ConvertirWebp from "../../config/Webp.js";
+import { exectQuery } from "../../config/mysql.js";
 
 export async function EnviarComida(req, res) {
   const { file } = req;
   const { jsonData } = req.body;
-  const { nombre, precio, estado, descripcion, categoria, sku } =
+  const { nombre, precio, estado, descripcion, categoria } =
     JSON.parse(jsonData);
 
   try {
@@ -68,9 +69,8 @@ export async function EnviarComida(req, res) {
 */
 
 export async function Menu(req, res) {
-  const database = await connectDatabase();
   try {
-    const [rows, fields] = await database.execute("Select * from comidas");
+    const rows = await exectQuery("select * from comida", []);
     res.send(rows);
   } catch (error) {
     res.status(404).send(error);
@@ -82,7 +82,7 @@ export async function Food(req, res) {
   const { id } = req.params;
   try {
     const [rows, fields] = await database.execute(
-      "Select * from comidas where id = ?",
+      "Select * from comida where id = ?",
       [id]
     );
     res.send(rows);
