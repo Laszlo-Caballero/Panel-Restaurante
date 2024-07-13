@@ -33,6 +33,9 @@ export default {
         "3-auto": "auto auto auto",
       },
     },
+    listStyleType: {
+      circle: "circle",
+    },
   },
   plugins: [],
 };
