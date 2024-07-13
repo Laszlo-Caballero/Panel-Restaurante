@@ -1,10 +1,4 @@
 import ConvertirWebp from "../../config/Webp.js";
-import connectDatabase from "../../config/mysql.js";
-import {
-  actualizarComida,
-  actualizarComidaFoto,
-  subirComida,
-} from "../../utils/database.js";
 
 export async function EnviarComida(req, res) {
   const { file } = req;
@@ -24,7 +18,7 @@ export async function EnviarComida(req, res) {
   }
 }
 
-export async function ActualizarComida(req, res) {
+/*export async function ActualizarComida(req, res) {
   const { file } = req;
   const { jsonData } = req.body;
   const { id, nombre, precio, estado, descripcion, vendidos, categoria, sku } =
@@ -70,6 +64,8 @@ export async function ActualizarComida(req, res) {
     }
   }
 }
+
+*/
 
 export async function Menu(req, res) {
   const database = await connectDatabase();

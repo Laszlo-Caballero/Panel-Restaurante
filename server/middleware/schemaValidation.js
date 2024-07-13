@@ -1,4 +1,4 @@
-import { menuSchema, userSchema, loginSchema } from "../utils/schemas.js";
+import { menuSchema, userSchema, loginSchema } from "../utils/validation.js";
 import { accessToken } from "../utils/jwt.js";
 
 export const ValidationMenu = async (req, res, next) => {

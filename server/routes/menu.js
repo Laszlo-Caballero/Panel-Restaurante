@@ -1,11 +1,6 @@
 import express from "express";
 import subirArchivo from "./../config/subirImagen.js";
-import {
-  ActualizarComida,
-  EnviarComida,
-  Food,
-  Menu,
-} from "../controllers/menu/Menu.js";
+import { EnviarComida, Food, Menu } from "../controllers/menu/Menu.js";
 import {
   ValidationMenu,
   ValidationUpdate,
@@ -19,12 +14,16 @@ router.post(
   ValidationMenu,
   EnviarComida
 );
+
+/*
 router.put(
   "/actualizar",
   subirArchivo.single("file"),
   ValidationUpdate,
   ActualizarComida
 );
+*/
+
 router.get("/", Menu);
 router.get("/comida/:id", Food);
 
