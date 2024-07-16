@@ -1,4 +1,4 @@
-import { menuSchema, userSchema, loginSchema } from "../utils/validation.js";
+import { menuSchema } from "../utils/validation.js";
 import { accessToken } from "../utils/jwt.js";
 
 export const ValidationMenu = async (req, res, next) => {
@@ -48,30 +48,6 @@ export const ValidationUpdate = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    return res.status(400).json({
-      error,
-    });
-  }
-};
-
-export const ValidationUser = (req, res, next) => {
-  const { nombre, email, contraseña } = req.body;
-  try {
-    userSchema.parse({ nombre, email, contraseña });
-    next();
-  } catch (error) {
-    return res.status(400).json({
-      error,
-    });
-  }
-};
-
-export const ValidationLogin = (req, res, next) => {
-  const { email, contraseña } = req.body;
-  try {
-    loginSchema.parse({ email, contraseña });
-    next();
-  } catch (error) {
     return res.status(400).json({
       error,
     });

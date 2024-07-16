@@ -9,13 +9,13 @@ import {
 import {
   ValidationMenu,
   ValidationUpdate,
-} from "../middleware/schemaValidation.js";
+} from "../middleware/menu.middleware.js";
 
 const router = express.Router();
 
 router.post(
   "/insertar",
-  subirArchivo.single("file"),
+  subirArchivo.array("files", 10),
   ValidationMenu,
   EnviarComida
 );

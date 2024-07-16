@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { exectQuery } from "../../config/mysql.js";
-import { createAccessToken, accessToken } from "../../utils/jwt.js";
+import { createAccessToken } from "../../utils/jwt.js";
 
 export async function Register(req, res) {
   const { nombre, email, contraseña } = req.body;
@@ -48,28 +48,4 @@ export async function Login(req, res) {
   } catch (error) {
     res.status(404).send("Not found");
   }
-}
-
-export async function Validate(req, res) {
-  const token = req.cookies.token;
-
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
-
-  const data = await accessToken(token);
-
-  if (!data) res.status(401).json({ message: "Unauthorized" });
-
-  res.json(data);
-}
-
-export async function ValidateAdmin(req, res) {
-  const token = req.cookies.token;
-
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
-
-  const data = await accessToken(token);
-
-  if (!data && data.tipo != "admin")
-    return res.status(401).json({ message: "Unauthorized" });
-  return res.json(data);
 }

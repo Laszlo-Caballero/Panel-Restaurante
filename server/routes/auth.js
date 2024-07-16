@@ -1,14 +1,11 @@
 import express from "express";
-import {
-  Register,
-  Login,
-  Validate,
-  ValidateAdmin,
-} from "../controllers/auth/auth.js";
+import { Register, Login } from "../controllers/auth/auth.js";
 import {
   ValidationLogin,
   ValidationUser,
-} from "../middleware/schemaValidation.js";
+  Validate,
+  ValidateAdmin,
+} from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.post("/register", ValidationUser, Register);

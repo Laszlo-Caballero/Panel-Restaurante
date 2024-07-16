@@ -1,5 +1,5 @@
 import express from "express";
-import { ValidationGet } from "../middleware/schemaValidation.js";
+import { ValidationGet } from "../middleware/menu.middleware.js";
 import { Orders } from "../controllers/Orders/orders.js";
 
 const router = express.Router();

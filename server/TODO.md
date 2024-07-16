@@ -1,11 +1,15 @@
 -Refactorizar codigo
 
--Base de datos:
--eliminar database.js
--exectQuery
+-insertar multiples imagenes
+-insertar multiples categorias
+-update
+-eliminar comidas ez
+
+-registrar usuario:
+✅solo admin puede hacer esto
 
 -middleWares:
--separa los middlewares
+-✅separa los middlewares
 
--Arreglar Envio comida
 -socket ⚠️
+-arreglar el enviar ordenes

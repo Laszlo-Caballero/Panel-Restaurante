@@ -2,43 +2,44 @@ import ConvertirWebp from "../../config/Webp.js";
 import { exectQuery } from "../../config/mysql.js";
 
 export async function EnviarComida(req, res) {
-  const { file } = req;
+  const { files } = req;
   const { jsonData } = req.body;
   const { nombre, precio, estado, descripcion, categoria } =
     JSON.parse(jsonData);
 
   try {
-    const img = file.filename.split(".").shift();
-    await ConvertirWebp(file);
+    console.log(files);
+    // const img = file.filename.split(".").shift();
+    // await ConvertirWebp(files);
 
-    const categoryId = await exectQuery(
-      "select idCategoria from categoria where categoria = ?",
-      [categoria]
-    );
+    // const categoryId = await exectQuery(
+    //   "select idCategoria from categoria where categoria = ?",
+    //   [categoria]
+    // );
 
-    console.log(categoryId);
+    // console.log(categoryId);
 
-    const imgUpload = await exectQuery(
-      "Insert into Imagen (imagenPath) values (?)",
-      [img]
-    );
+    // const imgUpload = await exectQuery(
+    //   "Insert into Imagen (imagenPath) values (?)",
+    //   [img]
+    // );
 
-    const FoodUpload = await exectQuery(
-      "insert into Comida (nombre, precio, estado, descripcion) values(?,?,?,?)",
-      [nombre, precio, estado, descripcion]
-    );
+    // const FoodUpload = await exectQuery(
+    //   "insert into Comida (nombre, precio, estado, descripcion) values(?,?,?,?)",
+    //   [nombre, precio, estado, descripcion]
+    // );
 
-    console.log(FoodUpload.insertId, categoryId[0].idCategoria);
-    const id = categoryId[0].idCategoria;
-    await exectQuery(
-      "insert into categoriacomida (idCategoria, idComida) values (?,?)",
-      [id, FoodUpload.insertId]
-    );
+    // console.log(FoodUpload.insertId, categoryId[0].idCategoria);
+    // const id = categoryId[0].idCategoria;
+    // await exectQuery(
+    //   "insert into categoriacomida (idCategoria, idComida) values (?,?)",
+    //   [id, FoodUpload.insertId]
+    // );
 
-    await exectQuery(
-      "Insert into imagencomida (idComida, idImagen) values (?,?)",
-      [FoodUpload.insertId, imgUpload.insertId]
-    );
+    // await exectQuery(
+    //   "Insert into imagencomida (idComida, idImagen) values (?,?)",
+    //   [FoodUpload.insertId, imgUpload.insertId]
+    // );
 
     res.send("se envio");
     console.log("se envio");

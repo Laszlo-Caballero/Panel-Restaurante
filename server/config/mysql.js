@@ -1,11 +1,5 @@
 import mysql from "mysql2/promise";
-
-const connectionConfig = {
-  host: "localhost",
-  user: "root",
-  password: "jade2314",
-  database: "restaurante",
-};
+import { connectionConfig } from "../const.js";
 
 export async function connectDatabase() {
   try {

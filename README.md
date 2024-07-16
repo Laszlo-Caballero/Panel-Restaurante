@@ -9,8 +9,6 @@ Currently, two official plugins are available:
 
 # TODOS
 
--quitar sku
--multiples categorias
--hacer mas chico el modal
+-refactorizar
+
 -multiples imagenes
--slider navbar
