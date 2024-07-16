@@ -12,6 +12,13 @@ insert into Categoria(categoria) values
 ("Carne");
 
 
+use restaurante;
+
+select * from Usuario;
+
+
+update usuario set tipo = "admin" where idUsuario = 2;
+
 
 select C.idComida , (
 select I.imagenPath from imagencomida as IC inner join Imagen as I on I.idImagen = IC.idImagen where C.idComida = IC.IdComida limit 1

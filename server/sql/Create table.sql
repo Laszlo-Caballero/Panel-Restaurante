@@ -1,3 +1,6 @@
+use restaurante;
+
+
 create table Usuario(
 	idUsuario int primary key auto_increment,
     nombre varchar(25) not null,
