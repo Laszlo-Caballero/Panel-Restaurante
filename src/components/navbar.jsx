@@ -8,8 +8,8 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import TableBarIcon from "@mui/icons-material/TableBar";
 function NavBar() {
   return (
-    <nav className="w-1/5 border-2 min-h-screen relative bg-white shadow-nav">
-      <div className="fixed w-1/6">
+    <nav className="w-1/5 border-2 min-h-screen relative bg-white shadow-nav scroll-m-0">
+      <div className="h-full overflow-y-auto">
         <img src={Logo} className="w-[95%]" alt="logo" />
         <div className="h-auto flex flex-col items-center">
           <Links icon={<Dash />} path="/panel">
