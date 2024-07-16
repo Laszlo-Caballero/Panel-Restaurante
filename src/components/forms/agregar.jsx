@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import axios from "src/utils/axios";
 import { useState } from "react";
 import useGet from "src/hooks/useGet";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function AgregarComida({ setModalForms }) {
   const {
@@ -16,7 +18,7 @@ function AgregarComida({ setModalForms }) {
     reset,
   } = useForm();
   const [loader, setLoader] = useState(false);
-  const [errorModal, setErrorModal] = useState(false);
+  const [files, setFiles] = useState([]);
   const categorias = useGet("menu/categoria");
   const onSubmit = handleSubmit((data) => {
     console.log(data);
@@ -32,7 +34,7 @@ function AgregarComida({ setModalForms }) {
         categoria: data.categoria,
       })
     );
-    formData.append("file", data.file[0]);
+    // formData.append("file", data.file[0]);
     axios
       .post("/menu/insertar", formData)
       .then((response) => {
@@ -44,6 +46,11 @@ function AgregarComida({ setModalForms }) {
         console.log(error);
       });
   });
+
+  const handleFiles = (e) => {
+    setFiles(Array.from(e.target.files));
+  };
+
   return (
     <Modal className="w-[60em] h-[40em] flex flex-col gap-y-8">
       <div
@@ -109,30 +116,47 @@ function AgregarComida({ setModalForms }) {
           />
           {errors.descripcion && <Error error={errors.descripcion.message} />}
           <LabelForm name="imagen" title="Imagen del Producto" />
-          <InputForm
+          <input
             type="file"
             name="imagen"
-            require={register("file", {
+            {...register("file", {
               required: {
                 value: true,
                 message: "Se necesita imagen",
               },
             })}
+            multiple
+            onChange={handleFiles}
           />
         </div>
         <div className="flex flex-col items-center justify-between shadow-Custom px-12 py-8 bg-nepal-50">
           <h1 className="font-WorkSansblod text-xl text-nepal-900 border-b border-black w-full text-center mb-12 py-2">
             Producto
           </h1>
-          <img
-            src={
-              watch("file") && watch("file").length > 0
-                ? URL.createObjectURL(watch("file")[0])
-                : Hamburgesa
-            }
-            alt="Imagen seleccionada"
+          <Carousel
+            showThumbs={false}
+            showStatus={false}
             className="w-[300px] h-[300px]"
-          />
+          >
+            {files.length > 0 ? (
+              files.map((value, index) => {
+                return (
+                  <div key={index}>
+                    <img
+                      src={URL.createObjectURL(value)}
+                      alt={`image-${index}`}
+                      className="w-[300px] h-[300px]"
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <div>
+                <img src={Hamburgesa} alt="image-test" />
+              </div>
+            )}
+          </Carousel>
+
           <div className="flex flex-col items-center w-full mt-2">
             <div className="flex items-center w-full justify-between">
               <LabelForm name="Estado" title="Estado disponible" />
