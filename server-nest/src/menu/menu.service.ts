@@ -17,7 +17,7 @@ export class MenuService {
 
   getComidas() {
     return this.comidaRepository.find({
-      relations: ['categorias', 'imagenes'],
+      relations: ['categorias', 'imagen'],
     });
   }
 

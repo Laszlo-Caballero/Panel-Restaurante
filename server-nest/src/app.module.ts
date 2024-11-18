@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MenuModule } from './menu/menu.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ImagenModule } from './imagen/imagen.module';
+import { EventsGateway } from './events/events.gateway';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -20,8 +22,9 @@ import { ImagenModule } from './imagen/imagen.module';
     MenuModule,
     CategoriaModule,
     ImagenModule,
+    EventsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, EventsGateway],
 })
 export class AppModule {}
