@@ -45,5 +45,5 @@ export class Comida {
       name: 'idImagen',
     },
   })
-  imagenes: Imagen[];
+  imagen: Imagen[];
 }
