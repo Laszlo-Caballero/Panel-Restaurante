@@ -8,6 +8,7 @@ import { EventsGateway } from './events/events.gateway';
 import { EventsModule } from './events/events.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { join } from 'path';
     CategoriaModule,
     ImagenModule,
     EventsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [EventsGateway],

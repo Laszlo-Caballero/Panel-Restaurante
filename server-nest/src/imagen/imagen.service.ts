@@ -26,7 +26,6 @@ export class ImagenService {
 
   async convertWebp(filePath: string) {
     const outputFile = filePath.replace(/\.\w+$/, '.webp');
-    console.log(outputFile);
     await sharp(filePath).resize(500, 500).webp().toFile(outputFile);
 
     await promises.unlink(filePath);
