@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MenuModule } from './menu/menu.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ImagenModule } from './imagen/imagen.module';
 import { EventsGateway } from './events/events.gateway';
 import { EventsModule } from './events/events.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -19,12 +20,16 @@ import { EventsModule } from './events/events.module';
       database: 'restaurante',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
     MenuModule,
     CategoriaModule,
     ImagenModule,
     EventsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, EventsGateway],
+  providers: [EventsGateway],
 })
 export class AppModule {}

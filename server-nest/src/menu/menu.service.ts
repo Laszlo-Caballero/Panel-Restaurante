@@ -50,6 +50,7 @@ export class MenuService {
         return categoria;
       }),
     );
+
     const imagenes = await Promise.all(
       images.map(async (imagen) => {
         const newImagen = await this.imagenService.createImagen(imagen);
