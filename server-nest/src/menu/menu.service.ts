@@ -44,7 +44,8 @@ export class MenuService {
           categoriasDto.categoria,
         );
         if (!categoria) {
-          categoria = await this.categoriaService.createCategoria(categoria);
+          categoria =
+            await this.categoriaService.createCategoria(categoriasDto);
         }
 
         return categoria;

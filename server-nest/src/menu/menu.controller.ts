@@ -5,6 +5,7 @@ import {
   Param,
   Post,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { MenuService } from './menu.service';
@@ -12,6 +13,7 @@ import { Comida } from 'src/entitys/menu.entity';
 import { ComidaDto } from 'src/dtos/comida.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('menu')
 export class MenuController {
@@ -26,6 +28,7 @@ export class MenuController {
     return this.comidasService.getComida(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(
     FilesInterceptor('files', 3, {

@@ -10,6 +10,8 @@ export class User {
   email: string;
   @Column({ length: 50, default: 'empleado' })
   tipo: string;
-  @Column()
+  @Column({ length: 500 })
+  contraseña: string;
+  @Column({ nullable: true })
   imagen: string;
 }
