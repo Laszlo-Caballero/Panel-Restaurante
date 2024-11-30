@@ -1,6 +1,6 @@
 import Hamburgesa from "src/assets/hamburgesa.jpg";
 import CloseIcon from "@mui/icons-material/Close";
-import { LabelForm, Error, InputForm, Slider, Loader } from "../forms/form";
+import { LabelForm, Error, InputForm, Slider, Loader } from "./form";
 import Modal from "../modal/modal";
 import { useForm } from "react-hook-form";
 import axios from "src/utils/axios";

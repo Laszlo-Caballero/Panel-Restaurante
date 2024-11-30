@@ -1,5 +1,5 @@
 import express from "express";
-import subirArchivo from "./../config/subirImagen.js";
+import subirArchivo from "../config/subirImagen.js";
 import {
   EnviarComida,
   Food,
