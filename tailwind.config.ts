@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animated";
 
 export default {
   content: [
@@ -12,7 +13,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      transitionProperty: {
+        height: "max-height",
+      },
     },
   },
-  plugins: [],
+  plugins: [animate],
 } satisfies Config;

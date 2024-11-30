@@ -9,3 +9,7 @@ export interface userLogin {
   };
   token: string;
 }
+export type user = {
+  email: string;
+  password: string;
+};

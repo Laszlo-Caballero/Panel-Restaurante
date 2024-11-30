@@ -5,7 +5,7 @@ import { constEnv } from "@/config/env";
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(0);
   const [data, setData] = useState<userLogin | null>(null);
 
   const login = async (email: string, contraseña: string) => {
@@ -18,16 +18,16 @@ export function useLogin() {
           contraseña,
         },
       );
-      if (response.status === 200) {
+      if (response.status === 201) {
         setData(response.data);
+        setLoading(false);
+        setError(201);
       } else {
         throw new Error("Error 404");
       }
     } catch (err) {
       console.log(err);
-      setError("error");
-    } finally {
-      setLoading(false);
+      setError(404);
     }
   };
 
