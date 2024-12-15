@@ -12,7 +12,7 @@ import { FaTable } from "react-icons/fa6";
 
 export default function Options() {
   return (
-    <nav className="shadow-nav relative min-h-screen w-1/5 scroll-m-0 border-2 bg-white">
+    <nav className="shadow-nav relative min-h-screen w-1/12 scroll-m-0 border-2 bg-white">
       <div className="h-full overflow-y-auto">
         <Image src={Logo} className="w-[95%]" alt="logo" />
         <LinkContent path="home" icon={<FaHome />}>

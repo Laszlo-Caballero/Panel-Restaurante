@@ -10,11 +10,13 @@ export default function PanelLayout({
 }>) {
   return (
     <>
-      <main className="flex">
-        <Options />
-        <div className="w-full">
-          <Nav />
-          <div className="h-full w-full">{children}</div>
+      <main className="flex min-h-svh w-full flex-1 flex-col">
+        <div className="flex w-full">
+          <Options />
+          <div className="flex w-full flex-col">
+            <Nav />
+            <div className="h-full w-full">{children}</div>
+          </div>
         </div>
       </main>
     </>

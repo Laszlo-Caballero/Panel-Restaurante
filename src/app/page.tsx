@@ -2,7 +2,6 @@
 import Image from "next/image";
 import ImagenLogin from "@/assets/images/login.jpg";
 import Input from "@/Components/ui/Input/Input";
-import { useLogin } from "@/hooks/useLogin";
 import { FormEvent, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { user } from "@/interfaces/types";
@@ -11,7 +10,7 @@ import { redirect } from "next/navigation";
 import { useUser } from "@/Context/UserContext";
 
 export default function Home() {
-  const { login, data, loading, error } = useLogin();
+  const { login, loading, error } = useUser();
   const {
     register,
     handleSubmit,
@@ -23,13 +22,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (error == 201 && data) {
-      updateState(data);
+    if (error == 201) {
       redirect("/panel/home");
     }
   }, [loading]);
-
-  const { updateState } = useUser();
 
   return (
     <>

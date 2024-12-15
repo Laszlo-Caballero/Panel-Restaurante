@@ -51,6 +51,7 @@ export class AuthService {
     const token = await this.jwtService.sign(payload);
 
     return {
+      status: 201,
       user,
       token,
     };
