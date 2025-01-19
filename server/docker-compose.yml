@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: server_restaurante
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      - PORT=${PORT}
+      - HOST_MYSQL=${HOST_MYSQL}
+      - PORT_MYSQL=${PORT_MYSQL}
+      - USER_MYSQL=${USER_MYSQL}
+      - PASSWORD_MYSQL=${PASSWORD_MYSQL}
+      - DATABASE_MYSQL=${DATABASE_MYSQL}
+    networks:
+      - mysql_network
+    depends_on:
+      - restaurantemysql
+  restaurantemysql:
+    container_name: mysql_restaurante
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PASSWORD_MYSQL}
+      MYSQL_DATABASE: ${DATABASE_MYSQL}
+      MYSQL_USER: ${USER_MYSQL}
+    ports:
+      - '${PORT_MYSQL}:${PORT_MYSQL}'
+    networks:
+      - mysql_network
+networks:
+  mysql_network:
+    driver: bridge

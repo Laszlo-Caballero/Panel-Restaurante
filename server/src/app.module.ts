@@ -10,16 +10,18 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'jade2314',
-      database: 'restaurante',
+      host: process.env.HOST_MYSQL,
+      port: Number.parseInt(process.env.PORT_MYSQL),
+      username: process.env.USER_MYSQL,
+      password: process.env.PASSWORD_MYSQL,
+      database: process.env.DATABASE_MYSQL,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     ServeStaticModule.forRoot({
