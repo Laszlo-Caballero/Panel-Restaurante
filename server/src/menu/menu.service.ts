@@ -15,10 +15,14 @@ export class MenuService {
     private imagenService: ImagenService,
   ) {}
 
-  getComidas() {
-    return this.comidaRepository.find({
+  async getComidas() {
+    const comidas = await this.comidaRepository.find({
       relations: ['categorias', 'imagen'],
     });
+    return {
+      body: comidas,
+      statusCode: HttpStatus.OK,
+    };
   }
 
   async getComida(id: number) {
@@ -34,7 +38,10 @@ export class MenuService {
       );
     }
 
-    return comida;
+    return {
+      body: comida,
+      statusCode: HttpStatus.OK,
+    };
   }
 
   async createComida(comida: ComidaDto, images: Express.Multer.File[]) {
@@ -66,6 +73,10 @@ export class MenuService {
       imagen: imagenes,
     });
 
-    return await this.comidaRepository.save(newComida);
+    const comidaSave = await this.comidaRepository.save(newComida);
+    return {
+      body: comidaSave,
+      statusCode: HttpStatus.CREATED,
+    };
   }
 }
