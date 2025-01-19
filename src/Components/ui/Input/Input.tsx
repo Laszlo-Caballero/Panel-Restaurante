@@ -5,36 +5,53 @@ import React, { InputHTMLAttributes, useState } from "react";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
+  classNameCustom?: {
+    container?: string;
+  };
 }
 
-export default function Input({ label, error, ...props }: Props) {
-  const [text, setText] = useState("");
-  const isValueEmpty = isEmpty(text);
+export default function Input({
+  label,
+  className,
+  classNameCustom,
+  ...props
+}: Props) {
+  const hasErrors = props.error && !isEmpty(props.error);
 
   return (
-    <div className="flex w-full flex-col items-center">
-      <div className="relative h-[60px] w-1/2 rounded bg-opacity-50 font-semibold shadow">
+    <div className="flex w-full items-center justify-center">
+      <div className={cx("relative", classNameCustom?.container)}>
         <input
-          {...props}
+          type="text"
+          id="floating_filled"
           className={cx(
-            "text-primary-800 peer h-full w-full rounded-lg border bg-transparent px-3 pt-5 outline-none transition-colors focus:border-blue-500",
+            "peer block w-full appearance-none rounded-lg border border-gray-300 bg-gray-50 px-3 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:bg-transparent dark:focus:border-blue-500",
+            className,
+            hasErrors &&
+              "border-red-600 focus:border-red-500 dark:border-red-600 dark:focus:border-red-500",
           )}
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
+          placeholder=" "
+          defaultValue={props.defaultValue}
+          {...props}
         />
         <label
+          htmlFor="floating_filled"
           className={cx(
-            isValueEmpty
-              ? "left-3 top-[19px] font-semibold text-slate-500"
-              : "text-primary-500 left-3 top-1 text-opacity-80",
-            "absolute transition-all peer-focus:left-3 peer-focus:top-1",
+            "absolute start-2.5 top-3 z-10 origin-[0] -translate-y-[110%] scale-75 transform bg-white pl-1 pr-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-[110%] peer-focus:scale-75 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500",
+            hasErrors && "text-red-600 dark:text-red-600",
           )}
         >
           {label}
         </label>
+        {props.error && (
+          <p
+            id="outlined_error_help"
+            className="mt-2 text-xs text-red-600 dark:text-red-400"
+          >
+            {props.error}
+          </p>
+        )}
       </div>
-      <p className="pt-2 font-medium">{error}</p>
     </div>
   );
 }

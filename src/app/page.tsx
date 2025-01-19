@@ -2,7 +2,7 @@
 import Image from "next/image";
 import ImagenLogin from "@/assets/images/login.jpg";
 import Input from "@/Components/ui/Input/Input";
-import { FormEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { user } from "@/interfaces/types";
 import Loader from "@/Components/ui/loader/Loader";
@@ -46,6 +46,9 @@ export default function Home() {
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
+              classNameCustom={{
+                container: "w-1/2",
+              }}
               label="Correo"
               error={errors.email?.message}
               {...register("email", {
@@ -57,6 +60,9 @@ export default function Home() {
               })}
             />
             <Input
+              classNameCustom={{
+                container: "w-1/2",
+              }}
               label="Contraseña"
               error={errors.password?.message}
               type="password"

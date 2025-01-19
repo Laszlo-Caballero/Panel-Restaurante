@@ -6,9 +6,13 @@ export default function Nav() {
   const { initialState } = useUser();
   console.log({ initialState });
   return (
-    <nav className="w-full bg-blue-200">
+    <nav className="flex w-full justify-between bg-blue-500 px-2 py-4 font-bold text-white">
       <p>Dashborad</p>
-      <MdNoteAlt />
+
+      <div className="flex items-center justify-center">
+        <MdNoteAlt width={4} height={4} />
+      </div>
+
       {/* <p>{initialState.user.nombre}</p> */}
     </nav>
   );

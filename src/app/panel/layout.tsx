@@ -15,7 +15,7 @@ export default function PanelLayout({
           <Options />
           <div className="flex w-full flex-col">
             <Nav />
-            <div className="h-full w-full">{children}</div>
+            <div className="h-full w-full p-4">{children}</div>
           </div>
         </div>
       </main>

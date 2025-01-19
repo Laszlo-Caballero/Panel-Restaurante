@@ -12,30 +12,30 @@ import { FaTable } from "react-icons/fa6";
 
 export default function Options() {
   return (
-    <nav className="shadow-nav relative min-h-screen w-1/12 scroll-m-0 border-2 bg-white">
+    <nav className="shadow-nav relative min-h-screen w-[12%] scroll-m-0 border-2 bg-white">
       <div className="h-full overflow-y-auto">
         <Image src={Logo} className="w-[95%]" alt="logo" />
         <LinkContent path="home" icon={<FaHome />}>
           Home
         </LinkContent>
-        <LinkContent icon={<MdTableRestaurant />} path="Mesas">
+        <LinkContent icon={<MdTableRestaurant />} path="mesas">
           Ver Mesas
         </LinkContent>
-        <LinkContent icon={<IoCreate />} path="Pedir">
+        <LinkContent icon={<IoCreate />} path="pedir">
           Pedir Comida
         </LinkContent>
-        <LinkContent icon={<MdNoteAlt />} path="Ordenes">
+        <LinkContent icon={<MdNoteAlt />} path="ordenes">
           Ordenes
         </LinkContent>
         <Details icon={<MdOutlineRestaurantMenu />} title="Menu">
           <LinkContent path="catalogo">Catalogo</LinkContent>
-          <LinkContent path="/panel/editar">Editar Menu</LinkContent>
+          <LinkContent path="menus">Tabla Menu</LinkContent>
         </Details>
         <Details icon={<FaTable />} title="Tablas">
-          <LinkContent path="/panel/Clientes">Clientes</LinkContent>
-          <LinkContent path="/panel/Ingresos">Ingresos</LinkContent>
-          <LinkContent path="/panel/Facturas">Facturas</LinkContent>
-          <LinkContent path="panel/Invetario">Inventario</LinkContent>
+          <LinkContent path="clientes">Clientes</LinkContent>
+          <LinkContent path="ingresos">Ingresos</LinkContent>
+          <LinkContent path="facturas">Facturas</LinkContent>
+          <LinkContent path="invetario">Inventario</LinkContent>
         </Details>
       </div>
     </nav>

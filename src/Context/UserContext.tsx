@@ -12,6 +12,7 @@ import {
   useState,
 } from "react";
 import Cookies from "js-cookie";
+import { Toast } from "componentsla";
 
 type UserContextType = {
   initialState: userLogin;
@@ -47,6 +48,7 @@ export const UserContextProvider: FC<HTMLAttributes<HTMLDivElement>> = ({
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(0);
+  const toast = Toast();
   const login = useCallback(async (email: string, contraseña: string) => {
     setLoading(true);
     try {
@@ -62,6 +64,7 @@ export const UserContextProvider: FC<HTMLAttributes<HTMLDivElement>> = ({
         setError(201);
         Cookies.set("data", JSON.stringify(data));
         localStorage.setItem("data", JSON.stringify(data));
+        toast.success("Bienvenido");
       } else {
         setLoading(false);
         setError(404);
@@ -69,7 +72,10 @@ export const UserContextProvider: FC<HTMLAttributes<HTMLDivElement>> = ({
       }
     } catch (err) {
       console.log(err);
+      setLoading(false);
+
       setError(404);
+      toast.error("Error 404");
     }
   }, []);
 
