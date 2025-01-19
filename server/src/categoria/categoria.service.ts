@@ -11,8 +11,13 @@ export class CategoriaService {
     private categoriaRepository: Repository<Catergorias>,
   ) {}
 
-  getCategorias(): Promise<Catergorias[]> {
-    return this.categoriaRepository.find();
+  async getCategorias() {
+    const categorias = await this.categoriaRepository.find();
+
+    return {
+      body: categorias,
+      statusCode: HttpStatus.OK,
+    };
   }
 
   async getCategoriaById(id: number) {
@@ -24,7 +29,10 @@ export class CategoriaService {
       return new HttpException('No se encontro', HttpStatus.NOT_FOUND);
     }
 
-    return categoria;
+    return {
+      body: categoria,
+      statusCode: HttpStatus.OK,
+    };
   }
 
   getCategoriaByName(name: string): Promise<Catergorias> {
@@ -33,11 +41,15 @@ export class CategoriaService {
     });
   }
 
-  createCategoria(categoriaDto: CategoriaDto) {
+  async createCategoria(categoriaDto: CategoriaDto) {
     const newCategoria = this.categoriaRepository.create({
       categoria: categoriaDto.categoria,
     });
 
-    return this.categoriaRepository.save(newCategoria);
+    const categoriaSave = await this.categoriaRepository.save(newCategoria);
+    return {
+      body: categoriaSave,
+      statusCode: HttpStatus.CREATED,
+    };
   }
 }

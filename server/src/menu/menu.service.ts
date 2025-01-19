@@ -44,8 +44,9 @@ export class MenuService {
           categoriasDto.categoria,
         );
         if (!categoria) {
-          categoria =
+          const categoriaresponsive =
             await this.categoriaService.createCategoria(categoriasDto);
+          categoria = categoriaresponsive.body;
         }
 
         return categoria;
