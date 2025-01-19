@@ -9,7 +9,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { MenuService } from './menu.service';
-import { Comida } from 'src/entitys/menu.entity';
 import { ComidaDto } from 'src/dtos/comida.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -20,7 +19,7 @@ export class MenuController {
   constructor(private comidasService: MenuService) {}
 
   @Get()
-  getComidas(): Promise<Comida[]> {
+  getComidas() {
     return this.comidasService.getComidas();
   }
   @Get(':id')
