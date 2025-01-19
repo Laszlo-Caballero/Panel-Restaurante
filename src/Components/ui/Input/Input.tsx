@@ -7,6 +7,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   classNameCustom?: {
     container?: string;
+    label?: string;
   };
 }
 
@@ -39,6 +40,7 @@ export default function Input({
           className={cx(
             "absolute start-2.5 top-3 z-10 origin-[0] -translate-y-[110%] scale-75 transform bg-white pl-1 pr-2 text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-[110%] peer-focus:scale-75 peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500",
             hasErrors && "text-red-600 dark:text-red-600",
+            classNameCustom?.label,
           )}
         >
           {label}
